@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Ashbrooke &middot; Adults-Only Luxury Hotel in Egg Harbor, Door County</title>
+<meta name="description" content="The Ashbrooke is the only adults-only luxury hotel in Door County. Thirty-six rooms in six suite styles, many with in-room whirlpool tubs and fireplaces. Egg Harbor, Wisconsin. Family-owned since 2001.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --burgundy-deep: #4a1822;
+    --burgundy: #6b1f2e;
+    --burgundy-mid: #8b2a3d;
+    --cream: #f8f3ea;
+    --cream-warm: #f1e8d6;
+    --cream-deeper: #e8dcc4;
+    --gold: #b08a4a;
+    --gold-bright: #c9a866;
+    --gold-deep: #8c6d3a;
+    --ink: #2a1a14;
+    --ink-soft: #5a463e;
+    --line: rgba(74, 24, 34, 0.12);
+    --shadow-soft: 0 6px 28px rgba(74, 24, 34, 0.08);
+    --shadow-card: 0 14px 40px rgba(74, 24, 34, 0.14);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--ink);
+    background: var(--cream);
+    line-height: 1.65;
+    font-weight: 400;
+    font-size: 16.5px;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-weight: 600;
+    color: var(--burgundy-deep);
+    letter-spacing: -0.005em;
+    line-height: 1.18;
+  }
+  h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); font-weight: 600; }
+  h2 { font-size: clamp(2rem, 4vw, 2.9rem); margin-bottom: 1.2rem; }
+  h3 { font-size: 1.5rem; margin-bottom: 0.75rem; }
+  h4 { font-size: 1.15rem; font-family: 'Inter', sans-serif; font-weight: 600; }
+  p { margin-bottom: 1.05rem; color: var(--ink-soft); }
+  a { color: var(--burgundy); text-decoration: none; transition: color 0.2s; }
+  a:hover { color: var(--gold-deep); }
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
+  .narrow { max-width: 820px; margin: 0 auto; }
+
+  /* Buttons */
+  .btn {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--burgundy-deep);
+    padding: 15px 38px;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    font-size: 0.86rem;
+    text-transform: uppercase;
+    transition: background 0.2s, transform 0.2s, color 0.2s;
+    border: 1px solid var(--gold);
+    cursor: pointer;
+  }
+  .btn:hover { background: var(--gold-bright); color: var(--burgundy-deep); transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent;
+    color: var(--cream);
+    border: 1px solid rgba(201, 168, 102, 0.6);
+  }
+  .btn-outline:hover { background: rgba(201, 168, 102, 0.14); color: var(--cream); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--burgundy);
+    border: 1px solid var(--gold);
+    padding: 9px 22px;
+    font-size: 0.74rem;
+  }
+  .btn-ghost:hover { background: var(--gold); color: var(--burgundy-deep); }
+
+  /* Header */
+  header {
+    background: rgba(248, 243, 234, 0.92);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+  }
+  .nav-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+  }
+  .brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--burgundy-deep);
+    letter-spacing: 0.02em;
+  }
+  .brand span { color: var(--gold); }
+  .nav-links { list-style: none; display: flex; gap: 32px; align-items: center; }
+  .nav-links a {
+    color: var(--ink);
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+  .nav-links a:hover { color: var(--burgundy); }
+  .nav-cta { margin-left: 6px; }
+
+  /* Hero */
+  .hero {
+    background:
+      linear-gradient(160deg, rgba(74, 24, 34, 0.82) 0%, rgba(42, 14, 18, 0.72) 55%, rgba(107, 31, 46, 0.78) 100%),
+      radial-gradient(ellipse at 72% 22%, rgba(176, 138, 74, 0.42), transparent 58%),
+      linear-gradient(135deg, #3a1019 0%, #5a1925 45%, #8c6d3a 130%);
+    color: var(--cream);
+    padding: 150px 0 130px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 120%, rgba(0,0,0,0.4), transparent 60%);
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; z-index: 1; }
+  .hero-eyebrow {
+    font-size: 0.8rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+    margin-bottom: 28px;
+    font-weight: 500;
+  }
+  .hero h1 { color: var(--cream); margin-bottom: 1.6rem; max-width: 980px; margin-left: auto; margin-right: auto; }
+  .hero h1 em { font-style: italic; color: var(--gold-bright); font-weight: 500; }
+  .hero-sub {
+    font-size: 1.25rem;
+    color: rgba(248, 243, 234, 0.9);
+    max-width: 680px;
+    margin: 0 auto 2.8rem;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+  .hero-cta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+  /* Trust band */
+  .trust-band {
+    background: var(--cream-warm);
+    border-bottom: 1px solid var(--line);
+    padding: 24px 0;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+  }
+  .trust-band strong { color: var(--burgundy); font-weight: 600; }
+  .trust-dot { color: var(--gold); margin: 0 12px; }
+
+  /* Sections */
+  section { padding: 96px 0; }
+  section.alt { background: var(--cream-warm); }
+  .section-eyebrow {
+    font-size: 0.76rem;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+  .center { text-align: center; }
+  .center .section-eyebrow { display: block; }
+  .lede {
+    font-size: 1.2rem;
+    color: var(--ink-soft);
+    max-width: 740px;
+    line-height: 1.62;
+    font-weight: 300;
+  }
+  .center .lede { margin-left: auto; margin-right: auto; }
+
+  /* About */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.35fr;
+    gap: 60px;
+    align-items: center;
+    margin-top: 2.4rem;
+  }
+  .portrait {
+    aspect-ratio: 4/5;
+    background:
+      radial-gradient(circle at 30% 22%, rgba(201, 168, 102, 0.45), transparent 55%),
+      radial-gradient(circle at 78% 75%, rgba(74, 24, 34, 0.55), transparent 60%),
+      linear-gradient(160deg, var(--burgundy) 0%, var(--burgundy-mid) 58%, var(--gold-deep) 100%);
+    border-radius: 6px;
+    box-shadow: var(--shadow-card);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    padding: 34px;
+  }
+  .portrait-cap {
+    position: relative;
+    z-index: 2;
+    color: var(--cream);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    letter-spacing: 0.03em;
+  }
+  .portrait-cap span {
+    display: block;
+    font-size: 0.74rem;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+    margin-top: 8px;
+  }
+  .about-body p { font-size: 1.06rem; }
+  .about-body strong { color: var(--burgundy); font-weight: 600; }
+  .family-list {
+    list-style: none;
+    margin-top: 1.6rem;
+    border-left: 2px solid var(--gold);
+    padding-left: 24px;
+  }
+  .family-list li { margin-bottom: 0.95rem; color: var(--ink-soft); font-size: 0.98rem; }
+  .family-list li strong { color: var(--ink); display: block; margin-bottom: 2px; font-weight: 600; }
+
+  /* Niche / positioning band */
+  .niche-block {
+    background:
+      radial-gradient(ellipse at 80% 20%, rgba(176, 138, 74, 0.25), transparent 55%),
+      linear-gradient(140deg, var(--burgundy-deep) 0%, var(--burgundy) 100%);
+    color: var(--cream);
+    border-radius: 14px;
+    padding: 64px 56px;
+    box-shadow: var(--shadow-card);
+    margin-top: 2rem;
+    text-align: center;
+  }
+  .niche-block .section-eyebrow { color: var(--gold-bright); }
+  .niche-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+    color: var(--cream);
+    line-height: 1.28;
+    margin: 0 auto 1.4rem;
+    font-weight: 500;
+    max-width: 760px;
+  }
+  .niche-headline em { color: var(--gold-bright); font-style: italic; }
+  .niche-block p { color: rgba(248, 243, 234, 0.9); font-size: 1.08rem; max-width: 700px; margin: 0 auto 1rem; font-weight: 300; }
+
+  /* Rooms grid */
+  .room-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: 2.8rem;
+  }
+  .room-card {
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.25s, box-shadow 0.25s;
+    display: flex;
+    flex-direction: column;
+  }
+  .room-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); }
+  .room-image {
+    aspect-ratio: 4/3;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    padding: 18px 22px;
+  }
+  .room-image.r1 { background: linear-gradient(135deg, #6b1f2e 0%, #8b2a3d 50%, #b08a4a 100%); }
+  .room-image.r2 { background: linear-gradient(135deg, #4a1822 0%, #6b1f2e 60%, #8c6d3a 100%); }
+  .room-image.r3 { background: linear-gradient(135deg, #8b2a3d 0%, #b08a4a 100%); }
+  .room-image.r4 { background: linear-gradient(135deg, #4a1822 0%, #2a1a14 70%, #8c6d3a 100%); }
+  .room-image.r5 { background: linear-gradient(135deg, #b08a4a 0%, #c9a866 50%, #6b1f2e 100%); }
+  .room-image.r6 { background: linear-gradient(135deg, #6b1f2e 0%, #4a1822 60%, #b08a4a 100%); }
+  .room-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 45%, rgba(0,0,0,0.5) 100%);
+  }
+  .room-tag {
+    color: var(--cream);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-style: italic;
+    position: relative;
+    z-index: 2;
+  }
+  .room-body { padding: 24px 26px 28px; display: flex; flex-direction: column; flex: 1; }
+  .room-body h4 { color: var(--burgundy-deep); margin-bottom: 8px; font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; }
+  .room-body p { font-size: 0.96rem; flex: 1; }
+  .room-features {
+    list-style: none;
+    margin: 14px 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .room-features li {
+    font-size: 0.76rem;
+    color: var(--gold-deep);
+    background: var(--cream-warm);
+    padding: 5px 11px;
+    border-radius: 12px;
+    letter-spacing: 0.02em;
+    font-weight: 500;
+  }
+
+  /* Amenities */
+  .amenity-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: 2.8rem;
+  }
+  .amenity {
+    text-align: center;
+    padding: 32px 24px;
+  }
+  .amenity-mark {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    background: var(--cream-warm);
+    border: 1px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    color: var(--gold-deep);
+    font-style: italic;
+  }
+  .amenity h4 { color: var(--burgundy-deep); margin-bottom: 8px; font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; }
+  .amenity p { font-size: 0.96rem; margin-bottom: 0; }
+
+  /* Experience */
+  .exp-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px;
+    align-items: center;
+    margin-top: 2.4rem;
+  }
+  .exp-image {
+    aspect-ratio: 5/4;
+    border-radius: 6px;
+    box-shadow: var(--shadow-card);
+    background:
+      radial-gradient(circle at 25% 30%, rgba(201, 168, 102, 0.4), transparent 50%),
+      linear-gradient(150deg, #8b2a3d 0%, #6b1f2e 50%, #4a1822 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    padding: 30px;
+  }
+  .exp-image span {
+    position: relative;
+    z-index: 2;
+    color: var(--cream);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    letter-spacing: 0.03em;
+  }
+  .exp-body strong { color: var(--burgundy); font-weight: 600; }
+  .exp-list { list-style: none; margin-top: 1.4rem; }
+  .exp-list li {
+    padding: 12px 0 12px 28px;
+    position: relative;
+    border-bottom: 1px dashed var(--line);
+    color: var(--ink);
+    font-size: 0.98rem;
+  }
+  .exp-list li:last-child { border-bottom: none; }
+  .exp-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 22px;
+    width: 14px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  /* CTA band */
+  .cta-band {
+    background:
+      radial-gradient(ellipse at 50% -20%, rgba(176, 138, 74, 0.3), transparent 60%),
+      linear-gradient(135deg, var(--burgundy-deep) 0%, var(--burgundy) 100%);
+    color: var(--cream);
+    text-align: center;
+    padding: 100px 0;
+  }
+  .cta-band h2 { color: var(--cream); margin-bottom: 1.2rem; }
+  .cta-band p { color: rgba(248, 243, 234, 0.88); max-width: 580px; margin: 0 auto 2.4rem; font-size: 1.12rem; font-weight: 300; }
+
+  /* Location */
+  .loc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+    margin-top: 2.4rem;
+  }
+  .loc-map {
+    aspect-ratio: 4/3;
+    border-radius: 6px;
+    box-shadow: var(--shadow-card);
+    background:
+      linear-gradient(135deg, #6b1f2e 0%, #8c6d3a 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+  }
+  .loc-map-inner { position: relative; z-index: 2; color: var(--cream); }
+  .loc-map-inner .pin { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.8rem; margin-bottom: 6px; }
+  .loc-map-inner .addr { font-size: 0.92rem; letter-spacing: 0.04em; color: rgba(248,243,234,0.85); }
+  .loc-detail dl { margin-top: 1.2rem; }
+  .loc-detail dt {
+    font-size: 0.74rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .loc-detail dd { margin-bottom: 1.3rem; color: var(--ink); font-size: 1.02rem; }
+  .loc-detail dd a { font-weight: 600; }
+
+  /* FAQ */
+  details {
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    margin-bottom: 14px;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  details[open] { box-shadow: var(--shadow-soft); }
+  summary {
+    padding: 22px 26px;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--burgundy-deep);
+    font-size: 1.06rem;
+    list-style: none;
+    position: relative;
+    padding-right: 56px;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after {
+    content: "+";
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    color: var(--gold);
+    font-weight: 300;
+    line-height: 1;
+    transition: transform 0.2s;
+  }
+  details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+  details > div {
+    padding: 0 26px 24px;
+    color: var(--ink-soft);
+    font-size: 0.99rem;
+    line-height: 1.7;
+  }
+
+  /* Footer */
+  footer {
+    background: var(--burgundy-deep);
+    color: var(--cream);
+    padding: 70px 0 34px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 44px;
+    margin-bottom: 48px;
+  }
+  footer .brand { color: var(--cream); margin-bottom: 14px; }
+  footer .brand span { color: var(--gold-bright); }
+  footer p { color: rgba(248, 243, 234, 0.74); font-size: 0.96rem; }
+  footer h5 {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.76rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+  footer ul { list-style: none; }
+  footer ul li { margin-bottom: 10px; }
+  footer ul a { color: rgba(248, 243, 234, 0.78); font-size: 0.95rem; }
+  footer ul a:hover { color: var(--gold-bright); }
+  .footer-meta {
+    padding-top: 28px;
+    border-top: 1px solid rgba(201, 168, 102, 0.18);
+    font-size: 0.82rem;
+    color: rgba(248, 243, 234, 0.5);
+    letter-spacing: 0.02em;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  @media (max-width: 880px) {
+    .nav-links { display: none; }
+    .hero { padding: 100px 0 84px; }
+    .hero-sub { font-size: 1.1rem; }
+    .about-grid, .exp-grid, .loc-grid { grid-template-columns: 1fr; gap: 36px; }
+    .room-grid, .amenity-grid { grid-template-columns: 1fr; }
+    section { padding: 64px 0; }
+    .niche-block { padding: 40px 28px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+    .footer-meta { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav-inner">
+    <div class="brand">The Ashbrooke <span>&middot;</span></div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#story">Our Story</a></li>
+        <li><a href="#rooms">Rooms</a></li>
+        <li><a href="#amenities">Amenities</a></li>
+        <li><a href="#location">Location</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li class="nav-cta"><a class="btn btn-ghost" href="#book">Book Direct</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-eyebrow">Egg Harbor &middot; Door County, Wisconsin</div>
+    <h1>The only <em>adults-only</em> luxury hotel in Door County.</h1>
+    <p class="hero-sub">Thirty-six rooms designed for two. Whirlpool tubs, fireplaces, and quiet evenings on the doorstep of Egg Harbor. Reserved entirely for couples and grown-up getaways.</p>
+    <div class="hero-cta">
+      <a class="btn" href="#book">Check Availability</a>
+      <a class="btn btn-outline" href="#rooms">Explore the Rooms</a>
+    </div>
+  </div>
+</section>
+
+<div class="trust-band">
+  <div class="container">
+    Family-owned since 2001 <span class="trust-dot">&middot;</span> <strong>Adults-only and couples-only</strong> <span class="trust-dot">&middot;</span> 36 rooms in 6 suite styles <span class="trust-dot">&middot;</span> In the heart of Egg Harbor
+  </div>
+</div>
+
+<section id="story">
+  <div class="container">
+    <div class="section-eyebrow">Our Story</div>
+    <h2>A family inn, kept for grown-ups.</h2>
+    <p class="lede">The Ashbrooke has been stewarded by the Anderson family since 2001. A quarter century later, it remains the one Door County hotel built entirely around couples and adult travelers, with no children in the building and no compromise on quiet.</p>
+
+    <div class="about-grid">
+      <div class="portrait" role="img" aria-label="The Anderson family at The Ashbrooke">
+        <div class="portrait-cap">
+          The Anderson Family
+          <span>Egg Harbor &middot; Since 2001</span>
+        </div>
+      </div>
+      <div class="about-body">
+        <p><strong>Fred and Debi Anderson</strong> took on The Ashbrooke in 2001 and have run it as a true family hotel ever since. Day to day, the inn is shaped by the people who own it, not by a corporate playbook.</p>
+        <p>That family thread runs deep in Door County. The Andersons' daughter, <strong>Kirstin Seaquist</strong>, married into the Seaquist Orchards family, one of the peninsula's best-known names in cherry growing. It is the kind of local root that you feel the moment you arrive: this is a hotel run by neighbors, for travelers who want the real Door County.</p>
+        <p>Every choice here follows from one decision made twenty-five years ago. The Ashbrooke would be a place for two. Anniversaries, milestone birthdays, honeymoons, elopements, and simple escapes from a full house at home.</p>
+        <ul class="family-list">
+          <li><strong>Fred &amp; Debi Anderson</strong>Owners and innkeepers since 2001.</li>
+          <li><strong>Kirstin Seaquist</strong>Daughter of the Andersons, married into the Seaquist Orchards family of Door County.</li>
+          <li><strong>Egg Harbor roots</strong>A locally owned inn in one of the most-loved villages on the peninsula.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="container">
+    <div class="niche-block">
+      <div class="section-eyebrow">Reserved for Two</div>
+      <p class="niche-headline">Door County has more than a hundred places to stay. <em>One</em> of them keeps every room for couples.</p>
+      <p>Resorts here fill with families. Inns fill with weekend crowds. The Ashbrooke chose a quieter path. Every one of the thirty-six rooms is set aside for two adults, so the whole property holds the calm you came north to find.</p>
+      <p>Come for the anniversary you have been planning all year. Come for the morning with nowhere to be. Come for the version of Door County you cannot get anywhere else.</p>
+    </div>
+  </div>
+</section>
+
+<section id="rooms">
+  <div class="container">
+    <div class="center">
+      <div class="section-eyebrow">Rooms &amp; Suites</div>
+      <h2>Six styles. Every one made for two.</h2>
+      <p class="lede">Each room at The Ashbrooke was designed around couples, with many featuring in-room whirlpool tubs, fireplaces, and private outdoor space. Find the room that fits your stay.</p>
+    </div>
+
+    <div class="room-grid">
+      <article class="room-card">
+        <div class="room-image r1"><span class="room-tag">I</span></div>
+        <div class="room-body">
+          <h4>Whirlpool Fireplace Suite</h4>
+          <p>Our signature pairing. An in-room whirlpool tub and a gas fireplace in one suite, made for milestone anniversaries and slow celebration weekends.</p>
+          <ul class="room-features"><li>Whirlpool</li><li>Fireplace</li><li>King bed</li></ul>
+          <a class="btn btn-ghost" href="#book">Book This Room</a>
+        </div>
+      </article>
+
+      <article class="room-card">
+        <div class="room-image r2"><span class="room-tag">II</span></div>
+        <div class="room-body">
+          <h4>Balcony Suite</h4>
+          <p>A private balcony over the grounds, with seating for an evening drink and the long Door County sunset. The whirlpool stays right inside.</p>
+          <ul class="room-features"><li>Balcony</li><li>Whirlpool</li><li>Quiet wing</li></ul>
+          <a class="btn btn-ghost" href="#book">Book This Room</a>
+        </div>
+      </article>
+
+      <article class="room-card">
+        <div class="room-image r3"><span class="room-tag">III</span></div>
+        <div class="room-body">
+          <h4>Premium King</h4>
+          <p>A spacious king-bedded room with a luxury bath and a sitting area, suited to the longer weekend when you plan to settle in.</p>
+          <ul class="room-features"><li>King bed</li><li>Soaking tub</li><li>Sitting area</li></ul>
+          <a class="btn btn-ghost" href="#book">Book This Room</a>
+        </div>
+      </article>
+
+      <article class="room-card">
+        <div class="room-image r4"><span class="room-tag">IV</span></div>
+        <div class="room-body">
+          <h4>Fireplace Studio</h4>
+          <p>A studio layout centered on the fireplace, with a queen bed and a quiet corner placement in the building for couples who want to disappear for a while.</p>
+          <ul class="room-features"><li>Fireplace</li><li>Queen bed</li><li>Studio plan</li></ul>
+          <a class="btn btn-ghost" href="#book">Book This Room</a>
+        </div>
+      </article>
+
+      <article class="room-card">
+        <div class="room-image r5"><span class="room-tag">V</span></div>
+        <div class="room-body">
+          <h4>Classic King Room</h4>
+          <p>The traditional Ashbrooke king, anchored by the in-room whirlpool tub that has become the inn's signature comfort.</p>
+          <ul class="room-features"><li>Whirlpool</li><li>King bed</li><li>Classic decor</li></ul>
+          <a class="btn btn-ghost" href="#book">Book This Room</a>
+        </div>
+      </article>
+
+      <article class="room-card">
+        <div class="room-image r6"><span class="room-tag">VI</span></div>
+        <div class="room-body">
+          <h4>Garden Room</h4>
+          <p>A ground-floor garden-side room with direct access to the inn's quiet outdoor seating, ideal for early risers who like their coffee outside.</p>
+          <ul class="room-features"><li>Garden access</li><li>Queen bed</li><li>Private patio</li></ul>
+          <a class="btn btn-ghost" href="#book">Book This Room</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="amenities">
+  <div class="container">
+    <div class="center">
+      <div class="section-eyebrow">Amenities</div>
+      <h2>The quiet comforts of a stay for two.</h2>
+      <p class="lede">Small touches, kept consistent across twenty-five years of innkeeping. Everything here is in service of an unhurried couples' getaway.</p>
+    </div>
+
+    <div class="amenity-grid">
+      <div class="amenity">
+        <div class="amenity-mark">W</div>
+        <h4>In-Room Whirlpool Tubs</h4>
+        <p>Many of our rooms feature a private whirlpool tub, the comfort our guests return for year after year.</p>
+      </div>
+      <div class="amenity">
+        <div class="amenity-mark">F</div>
+        <h4>Fireplaces</h4>
+        <p>Gas fireplaces in select suites and studios, made for cool Door County evenings and slow mornings.</p>
+      </div>
+      <div class="amenity">
+        <div class="amenity-mark">A</div>
+        <h4>Adults-Only Calm</h4>
+        <p>No children in the building means the whole property holds a quiet that families resorts simply cannot.</p>
+      </div>
+      <div class="amenity">
+        <div class="amenity-mark">B</div>
+        <h4>Private Balconies &amp; Gardens</h4>
+        <p>Select rooms open onto private balconies or garden-side patios for evening drinks and morning coffee.</p>
+      </div>
+      <div class="amenity">
+        <div class="amenity-mark">L</div>
+        <h4>Steps From the Village</h4>
+        <p>Set on Egg Harbor Road, you are minutes from the shops, galleries, and waterfront of the village.</p>
+      </div>
+      <div class="amenity">
+        <div class="amenity-mark">P</div>
+        <h4>Easy Arrivals</h4>
+        <p>On-site parking and a straightforward check-in, so the start of your stay is as calm as the rest of it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="container">
+    <div class="section-eyebrow">The Door County Experience</div>
+    <h2>Egg Harbor, just outside your door.</h2>
+    <div class="exp-grid">
+      <div class="exp-body">
+        <p class="lede" style="margin-bottom:1.2rem;">Egg Harbor sits on the bay side of the Door County peninsula, a village of orchards, harbors, and water views that draws travelers back season after season. The Ashbrooke puts you in the middle of it, then gives you a quiet room to return to.</p>
+        <p>Spend the morning among the cherry orchards the peninsula is famous for, including the Seaquist family farms our own family married into. Drive the shoreline to Sister Bay and Gills Rock. Watch the sunset over the water with nothing on the schedule but dinner.</p>
+        <ul class="exp-list">
+          <li><strong>Orchards &amp; farm markets</strong> a short drive into the heart of Wisconsin cherry country</li>
+          <li><strong>Harbor &amp; waterfront</strong> minutes from the village marina and the bay</li>
+          <li><strong>Galleries, dining &amp; shops</strong> walkable from the inn on Egg Harbor Road</li>
+          <li><strong>Quiet evenings home</strong> a fireplace and a whirlpool tub waiting at the end of the day</li>
+        </ul>
+      </div>
+      <div class="exp-image" role="img" aria-label="Door County waterfront and orchards near Egg Harbor">
+        <span>Door County, Wisconsin</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band" id="book">
+  <div class="container">
+    <div class="section-eyebrow" style="color:var(--gold-bright);">Reservations</div>
+    <h2>Book your stay, direct.</h2>
+    <p>Booking direct with The Ashbrooke means you reach the family who runs it, with no middle layer between you and your room. Call us or send a note and we will hold the room that fits your getaway.</p>
+    <div class="hero-cta">
+      <a class="btn" href="tel:+19208683113">Call (920) 868-3113</a>
+      <a class="btn btn-outline" href="mailto:reservations@ashbrooke.net">Email Reservations</a>
+    </div>
+  </div>
+</section>
+
+<section id="location">
+  <div class="container">
+    <div class="section-eyebrow">Find Us</div>
+    <h2>On Egg Harbor Road, in the village.</h2>
+    <div class="loc-grid">
+      <div class="loc-map" role="img" aria-label="Map location of The Ashbrooke in Egg Harbor">
+        <div class="loc-map-inner">
+          <div class="pin">The Ashbrooke</div>
+          <div class="addr">7942 Egg Harbor Rd, Egg Harbor, WI 54209</div>
+        </div>
+      </div>
+      <div class="loc-detail">
+        <p class="lede" style="font-size:1.08rem;">A short walk from the heart of Egg Harbor and an easy drive up the peninsula toward Fish Creek, Sister Bay, and the orchards beyond.</p>
+        <dl>
+          <dt>Address</dt>
+          <dd>7942 Egg Harbor Rd<br>Egg Harbor, WI 54209</dd>
+          <dt>Reservations</dt>
+          <dd><a href="tel:+19208683113">(920) 868-3113</a></dd>
+          <dt>Email</dt>
+          <dd><a href="mailto:reservations@ashbrooke.net">reservations@ashbrooke.net</a></dd>
+        </dl>
+        <a class="btn" href="#book">Book Direct</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="faq">
+  <div class="container narrow">
+    <div class="center">
+      <div class="section-eyebrow">Good to Know</div>
+      <h2>Questions before you book.</h2>
+    </div>
+
+    <div style="margin-top:2.4rem;">
+      <details open>
+        <summary>Is The Ashbrooke really adults-only?</summary>
+        <div>
+          Yes. The Ashbrooke is reserved for adults and couples across all of its rooms, with no children accommodated in the building. It is the one Door County hotel built entirely around grown-up getaways, which is exactly what keeps the property quiet and unhurried.
+        </div>
+      </details>
+
+      <details>
+        <summary>What time is check-in and check-out?</summary>
+        <div>
+          We will confirm exact check-in and check-out times with your reservation. If you are arriving early or need a later departure, let us know when you book and we will do our best to make it work around the day's schedule.
+        </div>
+      </details>
+
+      <details>
+        <summary>Which rooms have whirlpool tubs and fireplaces?</summary>
+        <div>
+          Many of our rooms include an in-room whirlpool tub, and several suites and studios add a gas fireplace. Each of the six room styles is described above. If a whirlpool tub or fireplace is a must for your stay, mention it when you book and we will match you to the right room.
+        </div>
+      </details>
+
+      <details>
+        <summary>How many rooms does the inn have?</summary>
+        <div>
+          The Ashbrooke has thirty-six rooms across six distinct styles, from the Whirlpool Fireplace Suite to the ground-floor Garden Room. Every one is set aside for two adults.
+        </div>
+      </details>
+
+      <details>
+        <summary>What is there to do nearby?</summary>
+        <div>
+          You are in the village of Egg Harbor, walking distance to galleries, dining, and shops, and a short drive from the harbors, orchards, and waterfront that Door County is known for. Sister Bay, Fish Creek, and the Seaquist cherry orchards are all within easy reach.
+        </div>
+      </details>
+
+      <details>
+        <summary>Why book directly with the hotel?</summary>
+        <div>
+          Booking direct connects you with the Anderson family who own and run The Ashbrooke. You reach the people who know the rooms best, and there is no third-party layer between you and your reservation. Call (920) 868-3113 or email reservations@ashbrooke.net.
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand">The Ashbrooke <span>&middot;</span></div>
+        <p>The only adults-only luxury hotel in Door County. Family-owned and stewarded by the Anderson family since 2001, in the village of Egg Harbor, Wisconsin.</p>
+      </div>
+      <div>
+        <h5>Explore</h5>
+        <ul>
+          <li><a href="#story">Our Story</a></li>
+          <li><a href="#rooms">Rooms &amp; Suites</a></li>
+          <li><a href="#amenities">Amenities</a></li>
+          <li><a href="#location">Location</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Reservations</h5>
+        <ul>
+          <li><a href="tel:+19208683113">(920) 868-3113</a></li>
+          <li><a href="mailto:reservations@ashbrooke.net">reservations@ashbrooke.net</a></li>
+          <li>7942 Egg Harbor Rd</li>
+          <li>Egg Harbor, WI 54209</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-meta">
+      <span>&copy; The Ashbrooke, Egg Harbor, Wisconsin. All rights reserved.</span>
+      <span>Demo site prepared by AG Consulting.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
