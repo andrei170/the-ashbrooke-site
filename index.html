@@ -7,10 +7,10 @@
 <meta name="description" content="The Ashbrooke is the only adults-only luxury hotel in Door County. Thirty-six rooms in six suite styles, many with in-room whirlpool tubs and fireplaces. Egg Harbor, Wisconsin. Family-owned since 2001.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --burgundy-deep: #4a1822;
+    --burgundy-deep: #3f141d;
     --burgundy: #6b1f2e;
     --burgundy-mid: #8b2a3d;
     --cream: #f8f3ea;
@@ -18,12 +18,17 @@
     --cream-deeper: #e8dcc4;
     --gold: #b08a4a;
     --gold-bright: #c9a866;
+    --gold-soft: #d8be8c;
     --gold-deep: #8c6d3a;
     --ink: #2a1a14;
     --ink-soft: #5a463e;
     --line: rgba(74, 24, 34, 0.12);
-    --shadow-soft: 0 6px 28px rgba(74, 24, 34, 0.08);
-    --shadow-card: 0 14px 40px rgba(74, 24, 34, 0.14);
+    --line-gold: rgba(176, 138, 74, 0.28);
+    --shadow-soft: 0 8px 30px rgba(74, 24, 34, 0.09);
+    --shadow-card: 0 18px 50px rgba(74, 24, 34, 0.16);
+    --shadow-deep: 0 30px 80px rgba(42, 14, 18, 0.30);
+    --maxw: 1180px;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -31,414 +36,717 @@
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     color: var(--ink);
     background: var(--cream);
-    line-height: 1.65;
+    line-height: 1.7;
     font-weight: 400;
     font-size: 16.5px;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
   h1, h2, h3, h4 {
     font-family: 'Cormorant Garamond', 'Georgia', serif;
     font-weight: 600;
     color: var(--burgundy-deep);
     letter-spacing: -0.005em;
-    line-height: 1.18;
+    line-height: 1.14;
   }
-  h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); font-weight: 600; }
-  h2 { font-size: clamp(2rem, 4vw, 2.9rem); margin-bottom: 1.2rem; }
+  h1 { font-size: clamp(2.9rem, 7vw, 5.4rem); font-weight: 600; }
+  h2 { font-size: clamp(2.1rem, 4.4vw, 3.3rem); margin-bottom: 1.3rem; }
   h3 { font-size: 1.5rem; margin-bottom: 0.75rem; }
   h4 { font-size: 1.15rem; font-family: 'Inter', sans-serif; font-weight: 600; }
   p { margin-bottom: 1.05rem; color: var(--ink-soft); }
-  a { color: var(--burgundy); text-decoration: none; transition: color 0.2s; }
+  a { color: var(--burgundy); text-decoration: none; transition: color 0.25s var(--ease); }
   a:hover { color: var(--gold-deep); }
-  .container { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
+  .container { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
   .narrow { max-width: 820px; margin: 0 auto; }
+
+  /* Eyebrow */
+  .section-eyebrow {
+    font-size: 0.74rem;
+    letter-spacing: 0.30em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 18px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-eyebrow::before {
+    content: "";
+    width: 28px;
+    height: 1px;
+    background: var(--gold);
+  }
+  .center .section-eyebrow::after {
+    content: "";
+    width: 28px;
+    height: 1px;
+    background: var(--gold);
+  }
 
   /* Buttons */
   .btn {
-    display: inline-block;
-    background: var(--gold);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold) 100%);
     color: var(--burgundy-deep);
-    padding: 15px 38px;
-    border-radius: 4px;
+    padding: 16px 40px;
+    border-radius: 3px;
     font-family: 'Inter', sans-serif;
     font-weight: 600;
-    letter-spacing: 0.06em;
-    font-size: 0.86rem;
+    letter-spacing: 0.08em;
+    font-size: 0.82rem;
     text-transform: uppercase;
-    transition: background 0.2s, transform 0.2s, color 0.2s;
+    transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), background 0.3s;
     border: 1px solid var(--gold);
     cursor: pointer;
+    box-shadow: 0 8px 24px rgba(140, 109, 58, 0.28);
   }
-  .btn:hover { background: var(--gold-bright); color: var(--burgundy-deep); transform: translateY(-1px); }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(140, 109, 58, 0.40); color: var(--burgundy-deep); }
   .btn-outline {
     background: transparent;
     color: var(--cream);
-    border: 1px solid rgba(201, 168, 102, 0.6);
+    border: 1px solid rgba(216, 190, 140, 0.55);
+    box-shadow: none;
   }
-  .btn-outline:hover { background: rgba(201, 168, 102, 0.14); color: var(--cream); }
+  .btn-outline:hover { background: rgba(216, 190, 140, 0.12); color: var(--cream); box-shadow: none; }
   .btn-ghost {
     background: transparent;
     color: var(--burgundy);
     border: 1px solid var(--gold);
-    padding: 9px 22px;
-    font-size: 0.74rem;
+    padding: 11px 24px;
+    font-size: 0.72rem;
+    box-shadow: none;
+    letter-spacing: 0.10em;
   }
-  .btn-ghost:hover { background: var(--gold); color: var(--burgundy-deep); }
+  .btn-ghost:hover { background: var(--gold); color: var(--burgundy-deep); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(140, 109, 58, 0.25); }
 
   /* Header */
   header {
-    background: rgba(248, 243, 234, 0.92);
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 200;
+    transition: background 0.4s var(--ease), backdrop-filter 0.4s, box-shadow 0.4s, padding 0.4s;
+    background: linear-gradient(180deg, rgba(42, 14, 18, 0.45) 0%, transparent 100%);
+  }
+  header.scrolled {
+    background: rgba(248, 243, 234, 0.94);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 2px 24px rgba(74, 24, 34, 0.10);
     border-bottom: 1px solid var(--line);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    backdrop-filter: blur(10px);
   }
   .nav-inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 0;
+    padding: 26px 0;
+    transition: padding 0.4s var(--ease);
   }
+  header.scrolled .nav-inner { padding: 15px 0; }
   .brand {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.6rem;
+    font-size: 1.7rem;
     font-weight: 600;
-    color: var(--burgundy-deep);
-    letter-spacing: 0.02em;
+    color: var(--cream);
+    letter-spacing: 0.03em;
+    transition: color 0.4s;
   }
-  .brand span { color: var(--gold); }
-  .nav-links { list-style: none; display: flex; gap: 32px; align-items: center; }
+  header.scrolled .brand { color: var(--burgundy-deep); }
+  .brand span { color: var(--gold-bright); }
+  .nav-links { list-style: none; display: flex; gap: 34px; align-items: center; }
   .nav-links a {
-    color: var(--ink);
-    font-size: 0.9rem;
+    color: rgba(248, 243, 234, 0.92);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    position: relative;
+    transition: color 0.4s;
+  }
+  header.scrolled .nav-links a { color: var(--ink); }
+  .nav-links a:not(.btn)::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: -5px;
+    width: 0; height: 1px;
+    background: var(--gold);
+    transition: width 0.3s var(--ease);
+  }
+  .nav-links a:not(.btn):hover::after { width: 100%; }
+  .nav-links a:not(.btn):hover { color: var(--gold-bright); }
+  header.scrolled .nav-links a:not(.btn):hover { color: var(--burgundy); }
+  header.scrolled .nav-cta a { color: var(--burgundy); border-color: var(--gold); }
+  .nav-cta a { color: var(--cream); border-color: rgba(216, 190, 140, 0.55); }
+  .nav-cta a:hover { color: var(--burgundy-deep) !important; }
+
+  /* Hamburger */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 210;
+  }
+  .hamburger span {
+    width: 26px; height: 2px;
+    background: var(--cream);
+    transition: transform 0.35s var(--ease), opacity 0.3s, background 0.4s;
+    display: block;
+  }
+  header.scrolled .hamburger span { background: var(--burgundy-deep); }
+  .mobile-nav.open ~ header .hamburger span,
+  body.menu-open .hamburger span { background: var(--cream); }
+  body.menu-open .hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  body.menu-open .hamburger span:nth-child(2) { opacity: 0; }
+  body.menu-open .hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-nav {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(160deg, var(--burgundy-deep) 0%, var(--burgundy) 100%);
+    z-index: 205;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 26px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s var(--ease);
+  }
+  .mobile-nav.open { opacity: 1; pointer-events: auto; }
+  .mobile-nav a {
+    color: var(--cream);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.9rem;
     font-weight: 500;
     letter-spacing: 0.02em;
   }
-  .nav-links a:hover { color: var(--burgundy); }
-  .nav-cta { margin-left: 6px; }
+  .mobile-nav a:hover { color: var(--gold-bright); }
+  .mobile-nav .btn { font-family: 'Inter', sans-serif; font-size: 0.82rem; margin-top: 10px; }
 
   /* Hero */
   .hero {
-    background:
-      linear-gradient(160deg, rgba(74, 24, 34, 0.82) 0%, rgba(42, 14, 18, 0.72) 55%, rgba(107, 31, 46, 0.78) 100%),
-      radial-gradient(ellipse at 72% 22%, rgba(176, 138, 74, 0.42), transparent 58%),
-      linear-gradient(135deg, #3a1019 0%, #5a1925 45%, #8c6d3a 130%);
+    min-height: 100vh;
     color: var(--cream);
-    padding: 150px 0 130px;
     position: relative;
     overflow: hidden;
+    display: flex;
+    align-items: center;
     text-align: center;
   }
-  .hero::before {
+  .hero-bg {
+    position: absolute;
+    inset: -8% 0 0 0;
+    height: 116%;
+    background:
+      linear-gradient(180deg, rgba(63, 20, 29, 0.55) 0%, rgba(42, 14, 18, 0.30) 40%, rgba(42, 14, 18, 0.85) 100%),
+      radial-gradient(ellipse 70% 60% at 72% 20%, rgba(201, 168, 102, 0.40), transparent 60%),
+      radial-gradient(ellipse 80% 70% at 18% 78%, rgba(107, 31, 46, 0.65), transparent 62%),
+      linear-gradient(135deg, #2e0c14 0%, #5a1925 42%, #8c6d3a 118%);
+    will-change: transform;
+    z-index: 0;
+  }
+  .hero-bg::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse at 50% 120%, rgba(0,0,0,0.4), transparent 60%);
+    background:
+      repeating-linear-gradient(115deg, rgba(255,255,255,0.018) 0px, rgba(255,255,255,0.018) 1px, transparent 1px, transparent 22px),
+      radial-gradient(ellipse at 50% 130%, rgba(0,0,0,0.55), transparent 58%);
     pointer-events: none;
   }
-  .hero-inner { position: relative; z-index: 1; }
-  .hero-eyebrow {
-    font-size: 0.8rem;
-    letter-spacing: 0.32em;
-    text-transform: uppercase;
-    color: var(--gold-bright);
-    margin-bottom: 28px;
-    font-weight: 500;
+  /* soft floating light orbs for depth */
+  .hero-bg::after {
+    content: "";
+    position: absolute;
+    width: 60vmax; height: 60vmax;
+    top: -20%; right: -10%;
+    background: radial-gradient(circle, rgba(216, 190, 140, 0.22) 0%, transparent 60%);
+    filter: blur(20px);
+    pointer-events: none;
   }
-  .hero h1 { color: var(--cream); margin-bottom: 1.6rem; max-width: 980px; margin-left: auto; margin-right: auto; }
-  .hero h1 em { font-style: italic; color: var(--gold-bright); font-weight: 500; }
+  .hero-vignette {
+    position: absolute; inset: 0;
+    box-shadow: inset 0 0 220px 60px rgba(42, 14, 18, 0.6);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .hero-inner { position: relative; z-index: 2; width: 100%; padding: 130px 0 90px; }
+  .hero-eyebrow {
+    font-size: 0.78rem;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+    margin-bottom: 30px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: ""; width: 36px; height: 1px;
+    background: rgba(216, 190, 140, 0.6);
+  }
+  .hero h1 { color: var(--cream); margin-bottom: 1.7rem; max-width: 1000px; margin-left: auto; margin-right: auto; text-shadow: 0 2px 40px rgba(0,0,0,0.35); }
+  .hero h1 em { font-style: italic; color: var(--gold-soft); font-weight: 500; }
   .hero-sub {
-    font-size: 1.25rem;
-    color: rgba(248, 243, 234, 0.9);
-    max-width: 680px;
-    margin: 0 auto 2.8rem;
-    line-height: 1.6;
+    font-size: 1.28rem;
+    color: rgba(248, 243, 234, 0.92);
+    max-width: 700px;
+    margin: 0 auto 2.9rem;
+    line-height: 1.65;
     font-weight: 300;
   }
   .hero-cta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .hero-scroll {
+    position: absolute;
+    left: 50%; bottom: 34px;
+    transform: translateX(-50%);
+    z-index: 2;
+    color: rgba(248, 243, 234, 0.7);
+    font-size: 0.66rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-scroll .line {
+    width: 1px; height: 46px;
+    background: linear-gradient(180deg, var(--gold-soft), transparent);
+    animation: scrollPulse 2.4s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+    50% { opacity: 1; transform: scaleY(1); }
+  }
+
+  /* Hero entrance reveal */
+  .hero-eyebrow, .hero h1, .hero-sub, .hero-cta {
+    opacity: 0;
+    transform: translateY(26px);
+    animation: heroRise 1.1s var(--ease) forwards;
+  }
+  .hero h1 { animation-delay: 0.15s; }
+  .hero-sub { animation-delay: 0.32s; }
+  .hero-cta { animation-delay: 0.48s; }
+  @keyframes heroRise {
+    to { opacity: 1; transform: translateY(0); }
+  }
 
   /* Trust band */
   .trust-band {
-    background: var(--cream-warm);
-    border-bottom: 1px solid var(--line);
-    padding: 24px 0;
+    background: var(--burgundy-deep);
+    color: var(--cream);
+    padding: 22px 0;
     text-align: center;
-    font-size: 0.9rem;
-    color: var(--ink-soft);
-    letter-spacing: 0.04em;
+    font-size: 0.86rem;
+    letter-spacing: 0.05em;
+    position: relative;
+    z-index: 3;
   }
-  .trust-band strong { color: var(--burgundy); font-weight: 600; }
-  .trust-dot { color: var(--gold); margin: 0 12px; }
+  .trust-band .container { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0; color: rgba(248, 243, 234, 0.82); }
+  .trust-band strong { color: var(--gold-bright); font-weight: 600; }
+  .trust-dot { color: var(--gold); margin: 0 14px; opacity: 0.8; }
 
   /* Sections */
-  section { padding: 96px 0; }
+  section { padding: 120px 0; position: relative; }
   section.alt { background: var(--cream-warm); }
-  .section-eyebrow {
-    font-size: 0.76rem;
-    letter-spacing: 0.26em;
-    text-transform: uppercase;
-    color: var(--gold-deep);
-    margin-bottom: 16px;
-    font-weight: 600;
+  section.alt::before, section.alt::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 60px;
+    pointer-events: none;
   }
   .center { text-align: center; }
-  .center .section-eyebrow { display: block; }
+  .center .section-eyebrow { display: inline-flex; }
   .lede {
-    font-size: 1.2rem;
+    font-size: 1.24rem;
     color: var(--ink-soft);
-    max-width: 740px;
+    max-width: 760px;
     line-height: 1.62;
     font-weight: 300;
   }
   .center .lede { margin-left: auto; margin-right: auto; }
 
+  /* Scroll reveal */
+  .reveal { opacity: 0; transform: translateY(34px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  .reveal.d1 { transition-delay: 0.08s; }
+  .reveal.d2 { transition-delay: 0.16s; }
+  .reveal.d3 { transition-delay: 0.24s; }
+  .reveal.d4 { transition-delay: 0.32s; }
+  .reveal.d5 { transition-delay: 0.40s; }
+
   /* About */
   .about-grid {
     display: grid;
     grid-template-columns: 1fr 1.35fr;
-    gap: 60px;
+    gap: 70px;
     align-items: center;
-    margin-top: 2.4rem;
+    margin-top: 3rem;
   }
   .portrait {
     aspect-ratio: 4/5;
     background:
-      radial-gradient(circle at 30% 22%, rgba(201, 168, 102, 0.45), transparent 55%),
-      radial-gradient(circle at 78% 75%, rgba(74, 24, 34, 0.55), transparent 60%),
-      linear-gradient(160deg, var(--burgundy) 0%, var(--burgundy-mid) 58%, var(--gold-deep) 100%);
-    border-radius: 6px;
-    box-shadow: var(--shadow-card);
+      radial-gradient(circle at 30% 18%, rgba(216, 190, 140, 0.50), transparent 55%),
+      radial-gradient(circle at 80% 80%, rgba(63, 20, 29, 0.65), transparent 60%),
+      linear-gradient(160deg, var(--burgundy) 0%, var(--burgundy-mid) 56%, var(--gold-deep) 100%);
+    border-radius: 8px;
+    box-shadow: var(--shadow-deep);
     position: relative;
     overflow: hidden;
     display: flex;
     align-items: flex-end;
-    padding: 34px;
+    padding: 36px;
+  }
+  .portrait::before {
+    content: "";
+    position: absolute;
+    inset: 14px;
+    border: 1px solid rgba(216, 190, 140, 0.40);
+    border-radius: 4px;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .portrait::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(125deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 26px),
+      linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.45) 100%);
   }
   .portrait-cap {
     position: relative;
-    z-index: 2;
+    z-index: 3;
     color: var(--cream);
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     letter-spacing: 0.03em;
   }
   .portrait-cap span {
     display: block;
-    font-size: 0.74rem;
+    font-size: 0.72rem;
     font-family: 'Inter', sans-serif;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--gold-bright);
-    margin-top: 8px;
+    color: var(--gold-soft);
+    margin-top: 9px;
   }
-  .about-body p { font-size: 1.06rem; }
+  .about-body p { font-size: 1.07rem; }
   .about-body strong { color: var(--burgundy); font-weight: 600; }
   .family-list {
     list-style: none;
-    margin-top: 1.6rem;
+    margin-top: 1.8rem;
     border-left: 2px solid var(--gold);
-    padding-left: 24px;
+    padding-left: 26px;
   }
-  .family-list li { margin-bottom: 0.95rem; color: var(--ink-soft); font-size: 0.98rem; }
-  .family-list li strong { color: var(--ink); display: block; margin-bottom: 2px; font-weight: 600; }
+  .family-list li { margin-bottom: 1.05rem; color: var(--ink-soft); font-size: 0.98rem; position: relative; }
+  .family-list li::before {
+    content: "";
+    position: absolute;
+    left: -33px; top: 8px;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 0 4px var(--cream);
+  }
+  .family-list li strong { color: var(--ink); display: block; margin-bottom: 3px; font-weight: 600; }
 
   /* Niche / positioning band */
   .niche-block {
     background:
-      radial-gradient(ellipse at 80% 20%, rgba(176, 138, 74, 0.25), transparent 55%),
+      radial-gradient(ellipse at 82% 18%, rgba(201, 168, 102, 0.30), transparent 55%),
+      radial-gradient(ellipse at 12% 88%, rgba(140, 109, 58, 0.24), transparent 55%),
       linear-gradient(140deg, var(--burgundy-deep) 0%, var(--burgundy) 100%);
     color: var(--cream);
-    border-radius: 14px;
-    padding: 64px 56px;
-    box-shadow: var(--shadow-card);
-    margin-top: 2rem;
+    border-radius: 16px;
+    padding: 80px 60px;
+    box-shadow: var(--shadow-deep);
+    margin-top: 0;
     text-align: center;
+    position: relative;
+    overflow: hidden;
   }
-  .niche-block .section-eyebrow { color: var(--gold-bright); }
+  .niche-block::before {
+    content: "";
+    position: absolute;
+    inset: 18px;
+    border: 1px solid rgba(216, 190, 140, 0.22);
+    border-radius: 10px;
+    pointer-events: none;
+  }
+  .niche-block::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(125deg, rgba(255,255,255,0.018) 0, rgba(255,255,255,0.018) 1px, transparent 1px, transparent 24px);
+    pointer-events: none;
+  }
+  .niche-block .section-eyebrow { color: var(--gold-soft); position: relative; z-index: 2; }
+  .niche-block .section-eyebrow::before, .niche-block .section-eyebrow::after { background: var(--gold-soft); }
   .niche-headline {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+    font-size: clamp(1.9rem, 3.6vw, 2.9rem);
     color: var(--cream);
-    line-height: 1.28;
-    margin: 0 auto 1.4rem;
+    line-height: 1.26;
+    margin: 0 auto 1.5rem;
     font-weight: 500;
-    max-width: 760px;
+    max-width: 780px;
+    position: relative;
+    z-index: 2;
   }
-  .niche-headline em { color: var(--gold-bright); font-style: italic; }
-  .niche-block p { color: rgba(248, 243, 234, 0.9); font-size: 1.08rem; max-width: 700px; margin: 0 auto 1rem; font-weight: 300; }
+  .niche-headline em { color: var(--gold-soft); font-style: italic; }
+  .niche-block p { color: rgba(248, 243, 234, 0.9); font-size: 1.1rem; max-width: 700px; margin: 0 auto 1rem; font-weight: 300; position: relative; z-index: 2; }
 
   /* Rooms grid */
   .room-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 28px;
-    margin-top: 2.8rem;
+    gap: 30px;
+    margin-top: 3.4rem;
   }
   .room-card {
     background: var(--cream);
     border: 1px solid var(--line);
-    border-radius: 8px;
+    border-radius: 10px;
     overflow: hidden;
     box-shadow: var(--shadow-soft);
-    transition: transform 0.25s, box-shadow 0.25s;
+    transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
     display: flex;
     flex-direction: column;
   }
-  .room-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); }
+  .room-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-card); }
   .room-image {
     aspect-ratio: 4/3;
     position: relative;
     overflow: hidden;
     display: flex;
     align-items: flex-end;
-    padding: 18px 22px;
+    padding: 22px 24px;
   }
-  .room-image.r1 { background: linear-gradient(135deg, #6b1f2e 0%, #8b2a3d 50%, #b08a4a 100%); }
-  .room-image.r2 { background: linear-gradient(135deg, #4a1822 0%, #6b1f2e 60%, #8c6d3a 100%); }
-  .room-image.r3 { background: linear-gradient(135deg, #8b2a3d 0%, #b08a4a 100%); }
-  .room-image.r4 { background: linear-gradient(135deg, #4a1822 0%, #2a1a14 70%, #8c6d3a 100%); }
-  .room-image.r5 { background: linear-gradient(135deg, #b08a4a 0%, #c9a866 50%, #6b1f2e 100%); }
-  .room-image.r6 { background: linear-gradient(135deg, #6b1f2e 0%, #4a1822 60%, #b08a4a 100%); }
+  .room-image .room-art {
+    position: absolute;
+    inset: 0;
+    transition: transform 0.9s var(--ease);
+    transform: scale(1.02);
+  }
+  .room-card:hover .room-image .room-art { transform: scale(1.10); }
+  .room-image.r1 .room-art { background: radial-gradient(circle at 28% 26%, rgba(216,190,140,0.45), transparent 55%), linear-gradient(135deg, #6b1f2e 0%, #8b2a3d 50%, #b08a4a 100%); }
+  .room-image.r2 .room-art { background: radial-gradient(circle at 75% 30%, rgba(201,168,102,0.40), transparent 52%), linear-gradient(135deg, #3f141d 0%, #6b1f2e 60%, #8c6d3a 100%); }
+  .room-image.r3 .room-art { background: radial-gradient(circle at 30% 70%, rgba(248,243,234,0.18), transparent 50%), linear-gradient(135deg, #8b2a3d 0%, #b08a4a 100%); }
+  .room-image.r4 .room-art { background: radial-gradient(circle at 70% 24%, rgba(201,168,102,0.42), transparent 52%), linear-gradient(135deg, #3f141d 0%, #2a1a14 70%, #8c6d3a 100%); }
+  .room-image.r5 .room-art { background: radial-gradient(circle at 30% 28%, rgba(248,243,234,0.20), transparent 50%), linear-gradient(135deg, #b08a4a 0%, #c9a866 50%, #6b1f2e 100%); }
+  .room-image.r6 .room-art { background: radial-gradient(circle at 78% 76%, rgba(216,190,140,0.40), transparent 55%), linear-gradient(135deg, #6b1f2e 0%, #3f141d 60%, #b08a4a 100%); }
+  .room-image::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(120deg, rgba(255,255,255,0.03) 0, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 20px);
+    z-index: 1;
+  }
   .room-image::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, transparent 45%, rgba(0,0,0,0.5) 100%);
+    background: linear-gradient(180deg, transparent 40%, rgba(20,6,9,0.62) 100%);
+    z-index: 1;
   }
   .room-tag {
     color: var(--cream);
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     font-weight: 600;
     font-style: italic;
     position: relative;
     z-index: 2;
+    text-shadow: 0 2px 14px rgba(0,0,0,0.4);
+    border: 1px solid rgba(216, 190, 140, 0.6);
+    border-radius: 50%;
+    width: 52px; height: 52px;
+    display: flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(2px);
   }
-  .room-body { padding: 24px 26px 28px; display: flex; flex-direction: column; flex: 1; }
-  .room-body h4 { color: var(--burgundy-deep); margin-bottom: 8px; font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; }
+  .room-body { padding: 26px 28px 30px; display: flex; flex-direction: column; flex: 1; }
+  .room-body h4 { color: var(--burgundy-deep); margin-bottom: 9px; font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; }
   .room-body p { font-size: 0.96rem; flex: 1; }
   .room-features {
     list-style: none;
-    margin: 14px 0 20px;
+    margin: 16px 0 22px;
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
   }
   .room-features li {
-    font-size: 0.76rem;
+    font-size: 0.74rem;
     color: var(--gold-deep);
     background: var(--cream-warm);
-    padding: 5px 11px;
-    border-radius: 12px;
-    letter-spacing: 0.02em;
+    padding: 6px 13px;
+    border-radius: 20px;
+    letter-spacing: 0.03em;
     font-weight: 500;
+    border: 1px solid var(--line-gold);
   }
 
   /* Amenities */
   .amenity-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 28px;
-    margin-top: 2.8rem;
+    gap: 8px;
+    margin-top: 3.4rem;
+    border: 1px solid var(--line-gold);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--line-gold);
   }
   .amenity {
     text-align: center;
-    padding: 32px 24px;
-  }
-  .amenity-mark {
-    width: 56px;
-    height: 56px;
-    margin: 0 auto 18px;
-    border-radius: 50%;
+    padding: 46px 30px;
     background: var(--cream-warm);
+    transition: background 0.4s var(--ease);
+  }
+  section:not(.alt) .amenity { background: var(--cream); }
+  .amenity:hover { background: #fff; }
+  .amenity-mark {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 32% 30%, #fff, var(--cream-warm));
     border: 1px solid var(--gold);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.6rem;
     color: var(--gold-deep);
-    font-style: italic;
+    box-shadow: 0 6px 18px rgba(176, 138, 74, 0.18);
+    transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
   }
-  .amenity h4 { color: var(--burgundy-deep); margin-bottom: 8px; font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; }
+  .amenity:hover .amenity-mark { transform: translateY(-4px) scale(1.04); box-shadow: 0 12px 26px rgba(176, 138, 74, 0.28); }
+  .amenity-mark svg { width: 30px; height: 30px; stroke: var(--gold-deep); fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+  .amenity h4 { color: var(--burgundy-deep); margin-bottom: 8px; font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; }
   .amenity p { font-size: 0.96rem; margin-bottom: 0; }
 
   /* Experience */
   .exp-grid {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
-    gap: 60px;
+    gap: 70px;
     align-items: center;
-    margin-top: 2.4rem;
+    margin-top: 3rem;
   }
   .exp-image {
     aspect-ratio: 5/4;
-    border-radius: 6px;
-    box-shadow: var(--shadow-card);
+    border-radius: 8px;
+    box-shadow: var(--shadow-deep);
     background:
-      radial-gradient(circle at 25% 30%, rgba(201, 168, 102, 0.4), transparent 50%),
-      linear-gradient(150deg, #8b2a3d 0%, #6b1f2e 50%, #4a1822 100%);
+      radial-gradient(circle at 25% 26%, rgba(216, 190, 140, 0.45), transparent 50%),
+      radial-gradient(circle at 80% 84%, rgba(63, 20, 29, 0.6), transparent 58%),
+      linear-gradient(150deg, #8b2a3d 0%, #6b1f2e 50%, #3f141d 100%);
     position: relative;
     overflow: hidden;
     display: flex;
     align-items: flex-end;
-    padding: 30px;
+    padding: 34px;
+  }
+  .exp-image::before {
+    content: "";
+    position: absolute;
+    inset: 14px;
+    border: 1px solid rgba(216, 190, 140, 0.40);
+    border-radius: 4px;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .exp-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(120deg, rgba(255,255,255,0.035) 0, rgba(255,255,255,0.035) 1px, transparent 1px, transparent 26px),
+      linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.42) 100%);
   }
   .exp-image span {
     position: relative;
-    z-index: 2;
+    z-index: 3;
     color: var(--cream);
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     letter-spacing: 0.03em;
   }
   .exp-body strong { color: var(--burgundy); font-weight: 600; }
-  .exp-list { list-style: none; margin-top: 1.4rem; }
+  .exp-list { list-style: none; margin-top: 1.6rem; }
   .exp-list li {
-    padding: 12px 0 12px 28px;
+    padding: 16px 0 16px 34px;
     position: relative;
-    border-bottom: 1px dashed var(--line);
+    border-bottom: 1px solid var(--line);
     color: var(--ink);
-    font-size: 0.98rem;
+    font-size: 0.99rem;
   }
   .exp-list li:last-child { border-bottom: none; }
   .exp-list li::before {
     content: "";
     position: absolute;
     left: 0;
-    top: 22px;
-    width: 14px;
-    height: 1px;
+    top: 24px;
+    width: 18px; height: 1px;
+    background: var(--gold);
+  }
+  .exp-list li::after {
+    content: "";
+    position: absolute;
+    left: 16px; top: 21px;
+    width: 6px; height: 6px;
+    border-radius: 50%;
     background: var(--gold);
   }
 
   /* CTA band */
   .cta-band {
-    background:
-      radial-gradient(ellipse at 50% -20%, rgba(176, 138, 74, 0.3), transparent 60%),
-      linear-gradient(135deg, var(--burgundy-deep) 0%, var(--burgundy) 100%);
     color: var(--cream);
     text-align: center;
-    padding: 100px 0;
+    padding: 130px 0;
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse at 50% -10%, rgba(201, 168, 102, 0.32), transparent 60%),
+      radial-gradient(ellipse at 90% 110%, rgba(140, 109, 58, 0.30), transparent 55%),
+      linear-gradient(135deg, var(--burgundy-deep) 0%, var(--burgundy) 100%);
   }
-  .cta-band h2 { color: var(--cream); margin-bottom: 1.2rem; }
-  .cta-band p { color: rgba(248, 243, 234, 0.88); max-width: 580px; margin: 0 auto 2.4rem; font-size: 1.12rem; font-weight: 300; }
+  .cta-band::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(125deg, rgba(255,255,255,0.016) 0, rgba(255,255,255,0.016) 1px, transparent 1px, transparent 24px);
+    pointer-events: none;
+  }
+  .cta-band .container { position: relative; z-index: 2; }
+  .cta-band .section-eyebrow { color: var(--gold-soft); }
+  .cta-band .section-eyebrow::before, .cta-band .section-eyebrow::after { background: var(--gold-soft); }
+  .cta-band h2 { color: var(--cream); margin-bottom: 1.3rem; }
+  .cta-band p { color: rgba(248, 243, 234, 0.9); max-width: 600px; margin: 0 auto 2.6rem; font-size: 1.14rem; font-weight: 300; }
 
   /* Location */
   .loc-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 56px;
+    gap: 64px;
     align-items: center;
-    margin-top: 2.4rem;
+    margin-top: 3rem;
   }
   .loc-map {
     aspect-ratio: 4/3;
-    border-radius: 6px;
-    box-shadow: var(--shadow-card);
+    border-radius: 8px;
+    box-shadow: var(--shadow-deep);
     background:
+      radial-gradient(circle at 30% 24%, rgba(216, 190, 140, 0.40), transparent 50%),
       linear-gradient(135deg, #6b1f2e 0%, #8c6d3a 100%);
     position: relative;
     overflow: hidden;
@@ -446,94 +754,130 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 30px;
+    padding: 34px;
+  }
+  .loc-map::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(0deg, rgba(248,243,234,0.05) 0, rgba(248,243,234,0.05) 1px, transparent 1px, transparent 40px),
+      repeating-linear-gradient(90deg, rgba(248,243,234,0.05) 0, rgba(248,243,234,0.05) 1px, transparent 1px, transparent 40px);
+  }
+  .loc-map::after {
+    content: "";
+    position: absolute;
+    inset: 16px;
+    border: 1px solid rgba(216, 190, 140, 0.35);
+    border-radius: 4px;
   }
   .loc-map-inner { position: relative; z-index: 2; color: var(--cream); }
-  .loc-map-inner .pin { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.8rem; margin-bottom: 6px; }
-  .loc-map-inner .addr { font-size: 0.92rem; letter-spacing: 0.04em; color: rgba(248,243,234,0.85); }
-  .loc-detail dl { margin-top: 1.2rem; }
+  .loc-map-inner .pin-mark {
+    width: 44px; height: 44px;
+    margin: 0 auto 14px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .loc-map-inner .pin-mark svg { width: 40px; height: 40px; stroke: var(--gold-soft); fill: rgba(63,20,29,0.4); stroke-width: 1.4; }
+  .loc-map-inner .pin { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 2rem; margin-bottom: 6px; }
+  .loc-map-inner .addr { font-size: 0.92rem; letter-spacing: 0.05em; color: rgba(248,243,234,0.88); }
+  .loc-detail dl { margin-top: 1.4rem; margin-bottom: 1.8rem; }
   .loc-detail dt {
-    font-size: 0.74rem;
-    letter-spacing: 0.18em;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--gold-deep);
     font-weight: 600;
-    margin-bottom: 4px;
+    margin-bottom: 5px;
   }
-  .loc-detail dd { margin-bottom: 1.3rem; color: var(--ink); font-size: 1.02rem; }
+  .loc-detail dd { margin-bottom: 1.4rem; color: var(--ink); font-size: 1.04rem; padding-bottom: 1.4rem; border-bottom: 1px solid var(--line); }
+  .loc-detail dd:last-of-type { border-bottom: none; }
   .loc-detail dd a { font-weight: 600; }
 
   /* FAQ */
   details {
     background: var(--cream);
     border: 1px solid var(--line);
-    border-radius: 8px;
+    border-radius: 10px;
     margin-bottom: 14px;
     overflow: hidden;
-    transition: box-shadow 0.2s;
+    transition: box-shadow 0.3s var(--ease), border-color 0.3s;
   }
-  details[open] { box-shadow: var(--shadow-soft); }
+  details[open] { box-shadow: var(--shadow-soft); border-color: var(--line-gold); }
   summary {
-    padding: 22px 26px;
+    padding: 24px 28px;
     cursor: pointer;
     font-weight: 600;
     color: var(--burgundy-deep);
-    font-size: 1.06rem;
+    font-size: 1.08rem;
     list-style: none;
     position: relative;
-    padding-right: 56px;
+    padding-right: 58px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.32rem;
+    transition: color 0.25s;
   }
+  summary:hover { color: var(--burgundy); }
   summary::-webkit-details-marker { display: none; }
   summary::after {
     content: "+";
     position: absolute;
-    right: 24px;
+    right: 26px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     color: var(--gold);
     font-weight: 300;
     line-height: 1;
-    transition: transform 0.2s;
+    transition: transform 0.3s var(--ease);
+    font-family: 'Inter', sans-serif;
   }
   details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
   details > div {
-    padding: 0 26px 24px;
+    padding: 0 28px 26px;
     color: var(--ink-soft);
-    font-size: 0.99rem;
-    line-height: 1.7;
+    font-size: 1rem;
+    line-height: 1.75;
   }
 
   /* Footer */
   footer {
     background: var(--burgundy-deep);
     color: var(--cream);
-    padding: 70px 0 34px;
+    padding: 84px 0 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  footer::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
   }
   .footer-grid {
     display: grid;
-    grid-template-columns: 1.4fr 1fr 1fr;
-    gap: 44px;
-    margin-bottom: 48px;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 52px;
   }
-  footer .brand { color: var(--cream); margin-bottom: 14px; }
+  footer .brand { color: var(--cream); margin-bottom: 16px; font-size: 1.8rem; }
   footer .brand span { color: var(--gold-bright); }
   footer p { color: rgba(248, 243, 234, 0.74); font-size: 0.96rem; }
   footer h5 {
     font-family: 'Inter', sans-serif;
-    font-size: 0.76rem;
-    letter-spacing: 0.18em;
+    font-size: 0.74rem;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--gold-bright);
-    margin-bottom: 16px;
+    margin-bottom: 18px;
     font-weight: 600;
   }
   footer ul { list-style: none; }
-  footer ul li { margin-bottom: 10px; }
+  footer ul li { margin-bottom: 11px; color: rgba(248, 243, 234, 0.78); font-size: 0.95rem; }
   footer ul a { color: rgba(248, 243, 234, 0.78); font-size: 0.95rem; }
   footer ul a:hover { color: var(--gold-bright); }
   .footer-meta {
-    padding-top: 28px;
+    padding-top: 30px;
     border-top: 1px solid rgba(201, 168, 102, 0.18);
     font-size: 0.82rem;
     color: rgba(248, 243, 234, 0.5);
@@ -546,20 +890,41 @@
 
   @media (max-width: 880px) {
     .nav-links { display: none; }
-    .hero { padding: 100px 0 84px; }
-    .hero-sub { font-size: 1.1rem; }
-    .about-grid, .exp-grid, .loc-grid { grid-template-columns: 1fr; gap: 36px; }
-    .room-grid, .amenity-grid { grid-template-columns: 1fr; }
-    section { padding: 64px 0; }
-    .niche-block { padding: 40px 28px; }
-    .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+    .hamburger { display: flex; }
+    section { padding: 76px 0; }
+    .hero-inner { padding: 120px 0 90px; }
+    .hero-sub { font-size: 1.12rem; }
+    .about-grid, .exp-grid, .loc-grid { grid-template-columns: 1fr; gap: 40px; }
+    .room-grid { grid-template-columns: 1fr; }
+    .amenity-grid { grid-template-columns: 1fr; }
+    .amenity { padding: 38px 28px; }
+    .niche-block { padding: 50px 30px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 32px; }
     .footer-meta { flex-direction: column; }
+    .trust-band .container { font-size: 0.78rem; }
+    .trust-dot { margin: 0 8px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+    .reveal { opacity: 1 !important; transform: none !important; }
+    .hero-eyebrow, .hero h1, .hero-sub, .hero-cta { opacity: 1; transform: none; }
   }
 </style>
 </head>
 <body>
 
-<header>
+<div class="mobile-nav" id="mobileNav">
+  <a href="#story">Our Story</a>
+  <a href="#rooms">Rooms</a>
+  <a href="#amenities">Amenities</a>
+  <a href="#location">Location</a>
+  <a href="#faq">FAQ</a>
+  <a class="btn" href="#book">Book Direct</a>
+</div>
+
+<header id="siteHeader">
   <div class="container nav-inner">
     <div class="brand">The Ashbrooke <span>&middot;</span></div>
     <nav>
@@ -572,10 +937,15 @@
         <li class="nav-cta"><a class="btn btn-ghost" href="#book">Book Direct</a></li>
       </ul>
     </nav>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
 <section class="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-vignette"></div>
   <div class="container hero-inner">
     <div class="hero-eyebrow">Egg Harbor &middot; Door County, Wisconsin</div>
     <h1>The only <em>adults-only</em> luxury hotel in Door County.</h1>
@@ -585,28 +955,32 @@
       <a class="btn btn-outline" href="#rooms">Explore the Rooms</a>
     </div>
   </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <span class="line"></span>
+  </div>
 </section>
 
 <div class="trust-band">
   <div class="container">
-    Family-owned since 2001 <span class="trust-dot">&middot;</span> <strong>Adults-only and couples-only</strong> <span class="trust-dot">&middot;</span> 36 rooms in 6 suite styles <span class="trust-dot">&middot;</span> In the heart of Egg Harbor
+    <span>Family-owned since 2001</span> <span class="trust-dot">&middot;</span> <strong>Adults-only and couples-only</strong> <span class="trust-dot">&middot;</span> <span>36 rooms in 6 suite styles</span> <span class="trust-dot">&middot;</span> <span>In the heart of Egg Harbor</span>
   </div>
 </div>
 
 <section id="story">
   <div class="container">
-    <div class="section-eyebrow">Our Story</div>
-    <h2>A family inn, kept for grown-ups.</h2>
-    <p class="lede">The Ashbrooke has been stewarded by the Anderson family since 2001. A quarter century later, it remains the one Door County hotel built entirely around couples and adult travelers, with no children in the building and no compromise on quiet.</p>
+    <div class="reveal"><div class="section-eyebrow">Our Story</div></div>
+    <h2 class="reveal d1">A family inn, kept for grown-ups.</h2>
+    <p class="lede reveal d2">The Ashbrooke has been stewarded by the Anderson family since 2001. A quarter century later, it remains the one Door County hotel built entirely around couples and adult travelers, with no children in the building and no compromise on quiet.</p>
 
     <div class="about-grid">
-      <div class="portrait" role="img" aria-label="The Anderson family at The Ashbrooke">
+      <div class="portrait reveal d2" role="img" aria-label="The Anderson family at The Ashbrooke">
         <div class="portrait-cap">
           The Anderson Family
           <span>Egg Harbor &middot; Since 2001</span>
         </div>
       </div>
-      <div class="about-body">
+      <div class="about-body reveal d3">
         <p><strong>Fred and Debi Anderson</strong> took on The Ashbrooke in 2001 and have run it as a true family hotel ever since. Day to day, the inn is shaped by the people who own it, not by a corporate playbook.</p>
         <p>That family thread runs deep in Door County. The Andersons' daughter, <strong>Kirstin Seaquist</strong>, married into the Seaquist Orchards family, one of the peninsula's best-known names in cherry growing. It is the kind of local root that you feel the moment you arrive: this is a hotel run by neighbors, for travelers who want the real Door County.</p>
         <p>Every choice here follows from one decision made twenty-five years ago. The Ashbrooke would be a place for two. Anniversaries, milestone birthdays, honeymoons, elopements, and simple escapes from a full house at home.</p>
@@ -622,7 +996,7 @@
 
 <section class="alt">
   <div class="container">
-    <div class="niche-block">
+    <div class="niche-block reveal">
       <div class="section-eyebrow">Reserved for Two</div>
       <p class="niche-headline">Door County has more than a hundred places to stay. <em>One</em> of them keeps every room for couples.</p>
       <p>Resorts here fill with families. Inns fill with weekend crowds. The Ashbrooke chose a quieter path. Every one of the thirty-six rooms is set aside for two adults, so the whole property holds the calm you came north to find.</p>
@@ -634,14 +1008,14 @@
 <section id="rooms">
   <div class="container">
     <div class="center">
-      <div class="section-eyebrow">Rooms &amp; Suites</div>
-      <h2>Six styles. Every one made for two.</h2>
-      <p class="lede">Each room at The Ashbrooke was designed around couples, with many featuring in-room whirlpool tubs, fireplaces, and private outdoor space. Find the room that fits your stay.</p>
+      <div class="reveal"><div class="section-eyebrow">Rooms &amp; Suites</div></div>
+      <h2 class="reveal d1">Six styles. Every one made for two.</h2>
+      <p class="lede reveal d2">Each room at The Ashbrooke was designed around couples, with many featuring in-room whirlpool tubs, fireplaces, and private outdoor space. Find the room that fits your stay.</p>
     </div>
 
     <div class="room-grid">
-      <article class="room-card">
-        <div class="room-image r1"><span class="room-tag">I</span></div>
+      <article class="room-card reveal d1">
+        <div class="room-image r1"><div class="room-art"></div><span class="room-tag">I</span></div>
         <div class="room-body">
           <h4>Whirlpool Fireplace Suite</h4>
           <p>Our signature pairing. An in-room whirlpool tub and a gas fireplace in one suite, made for milestone anniversaries and slow celebration weekends.</p>
@@ -650,8 +1024,8 @@
         </div>
       </article>
 
-      <article class="room-card">
-        <div class="room-image r2"><span class="room-tag">II</span></div>
+      <article class="room-card reveal d2">
+        <div class="room-image r2"><div class="room-art"></div><span class="room-tag">II</span></div>
         <div class="room-body">
           <h4>Balcony Suite</h4>
           <p>A private balcony over the grounds, with seating for an evening drink and the long Door County sunset. The whirlpool stays right inside.</p>
@@ -660,8 +1034,8 @@
         </div>
       </article>
 
-      <article class="room-card">
-        <div class="room-image r3"><span class="room-tag">III</span></div>
+      <article class="room-card reveal d3">
+        <div class="room-image r3"><div class="room-art"></div><span class="room-tag">III</span></div>
         <div class="room-body">
           <h4>Premium King</h4>
           <p>A spacious king-bedded room with a luxury bath and a sitting area, suited to the longer weekend when you plan to settle in.</p>
@@ -670,8 +1044,8 @@
         </div>
       </article>
 
-      <article class="room-card">
-        <div class="room-image r4"><span class="room-tag">IV</span></div>
+      <article class="room-card reveal d1">
+        <div class="room-image r4"><div class="room-art"></div><span class="room-tag">IV</span></div>
         <div class="room-body">
           <h4>Fireplace Studio</h4>
           <p>A studio layout centered on the fireplace, with a queen bed and a quiet corner placement in the building for couples who want to disappear for a while.</p>
@@ -680,8 +1054,8 @@
         </div>
       </article>
 
-      <article class="room-card">
-        <div class="room-image r5"><span class="room-tag">V</span></div>
+      <article class="room-card reveal d2">
+        <div class="room-image r5"><div class="room-art"></div><span class="room-tag">V</span></div>
         <div class="room-body">
           <h4>Classic King Room</h4>
           <p>The traditional Ashbrooke king, anchored by the in-room whirlpool tub that has become the inn's signature comfort.</p>
@@ -690,8 +1064,8 @@
         </div>
       </article>
 
-      <article class="room-card">
-        <div class="room-image r6"><span class="room-tag">VI</span></div>
+      <article class="room-card reveal d3">
+        <div class="room-image r6"><div class="room-art"></div><span class="room-tag">VI</span></div>
         <div class="room-body">
           <h4>Garden Room</h4>
           <p>A ground-floor garden-side room with direct access to the inn's quiet outdoor seating, ideal for early risers who like their coffee outside.</p>
@@ -706,39 +1080,51 @@
 <section class="alt" id="amenities">
   <div class="container">
     <div class="center">
-      <div class="section-eyebrow">Amenities</div>
-      <h2>The quiet comforts of a stay for two.</h2>
-      <p class="lede">Small touches, kept consistent across twenty-five years of innkeeping. Everything here is in service of an unhurried couples' getaway.</p>
+      <div class="reveal"><div class="section-eyebrow">Amenities</div></div>
+      <h2 class="reveal d1">The quiet comforts of a stay for two.</h2>
+      <p class="lede reveal d2">Small touches, kept consistent across twenty-five years of innkeeping. Everything here is in service of an unhurried couples' getaway.</p>
     </div>
 
-    <div class="amenity-grid">
+    <div class="amenity-grid reveal d2">
       <div class="amenity">
-        <div class="amenity-mark">W</div>
+        <div class="amenity-mark">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13h16v3a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"/><path d="M6 13V6a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2"/><path d="M8.5 7.5h.01"/><path d="M9 20l-1 2M16 20l1 2"/></svg>
+        </div>
         <h4>In-Room Whirlpool Tubs</h4>
         <p>Many of our rooms feature a private whirlpool tub, the comfort our guests return for year after year.</p>
       </div>
       <div class="amenity">
-        <div class="amenity-mark">F</div>
+        <div class="amenity-mark">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c1.5 3-1 4.5-1 7a3 3 0 0 0 6 0c0-1 .3-2 .8-2.8C19 11 20 13 20 15a8 8 0 1 1-16 0c0-4 3-6 4-9 .8 1 1.2 2 1.2 3 0 .7 1.5.5 1.8-1 .3-1.5-.8-3-0-5z"/></svg>
+        </div>
         <h4>Fireplaces</h4>
         <p>Gas fireplaces in select suites and studios, made for cool Door County evenings and slow mornings.</p>
       </div>
       <div class="amenity">
-        <div class="amenity-mark">A</div>
+        <div class="amenity-mark">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg>
+        </div>
         <h4>Adults-Only Calm</h4>
         <p>No children in the building means the whole property holds a quiet that families resorts simply cannot.</p>
       </div>
       <div class="amenity">
-        <div class="amenity-mark">B</div>
+        <div class="amenity-mark">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V8l5-4 5 4v13"/><path d="M9 21v-5h2v5"/><path d="M19 21v-9l-4-3"/></svg>
+        </div>
         <h4>Private Balconies &amp; Gardens</h4>
         <p>Select rooms open onto private balconies or garden-side patios for evening drinks and morning coffee.</p>
       </div>
       <div class="amenity">
-        <div class="amenity-mark">L</div>
+        <div class="amenity-mark">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6-4.5-6-9a6 6 0 0 1 12 0c0 4.5-6 9-6 9z"/><circle cx="12" cy="12" r="2.2"/></svg>
+        </div>
         <h4>Steps From the Village</h4>
         <p>Set on Egg Harbor Road, you are minutes from the shops, galleries, and waterfront of the village.</p>
       </div>
       <div class="amenity">
-        <div class="amenity-mark">P</div>
+        <div class="amenity-mark">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 11l1.5-4.5A2 2 0 0 1 8.4 5h7.2a2 2 0 0 1 1.9 1.5L19 11"/><path d="M4 11h16v5a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-1H7v1a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/><circle cx="7.5" cy="14" r="1"/><circle cx="16.5" cy="14" r="1"/></svg>
+        </div>
         <h4>Easy Arrivals</h4>
         <p>On-site parking and a straightforward check-in, so the start of your stay is as calm as the rest of it.</p>
       </div>
@@ -748,10 +1134,10 @@
 
 <section id="experience">
   <div class="container">
-    <div class="section-eyebrow">The Door County Experience</div>
-    <h2>Egg Harbor, just outside your door.</h2>
+    <div class="reveal"><div class="section-eyebrow">The Door County Experience</div></div>
+    <h2 class="reveal d1">Egg Harbor, just outside your door.</h2>
     <div class="exp-grid">
-      <div class="exp-body">
+      <div class="exp-body reveal d2">
         <p class="lede" style="margin-bottom:1.2rem;">Egg Harbor sits on the bay side of the Door County peninsula, a village of orchards, harbors, and water views that draws travelers back season after season. The Ashbrooke puts you in the middle of it, then gives you a quiet room to return to.</p>
         <p>Spend the morning among the cherry orchards the peninsula is famous for, including the Seaquist family farms our own family married into. Drive the shoreline to Sister Bay and Gills Rock. Watch the sunset over the water with nothing on the schedule but dinner.</p>
         <ul class="exp-list">
@@ -761,7 +1147,7 @@
           <li><strong>Quiet evenings home</strong> a fireplace and a whirlpool tub waiting at the end of the day</li>
         </ul>
       </div>
-      <div class="exp-image" role="img" aria-label="Door County waterfront and orchards near Egg Harbor">
+      <div class="exp-image reveal d3" role="img" aria-label="Door County waterfront and orchards near Egg Harbor">
         <span>Door County, Wisconsin</span>
       </div>
     </div>
@@ -770,10 +1156,10 @@
 
 <section class="cta-band" id="book">
   <div class="container">
-    <div class="section-eyebrow" style="color:var(--gold-bright);">Reservations</div>
-    <h2>Book your stay, direct.</h2>
-    <p>Booking direct with The Ashbrooke means you reach the family who runs it, with no middle layer between you and your room. Call us or send a note and we will hold the room that fits your getaway.</p>
-    <div class="hero-cta">
+    <div class="reveal"><div class="section-eyebrow">Reservations</div></div>
+    <h2 class="reveal d1">Book your stay, direct.</h2>
+    <p class="reveal d2">Booking direct with The Ashbrooke means you reach the family who runs it, with no middle layer between you and your room. Call us or send a note and we will hold the room that fits your getaway.</p>
+    <div class="hero-cta reveal d3">
       <a class="btn" href="tel:+19208683113">Call (920) 868-3113</a>
       <a class="btn btn-outline" href="mailto:reservations@ashbrooke.net">Email Reservations</a>
     </div>
@@ -782,16 +1168,19 @@
 
 <section id="location">
   <div class="container">
-    <div class="section-eyebrow">Find Us</div>
-    <h2>On Egg Harbor Road, in the village.</h2>
+    <div class="reveal"><div class="section-eyebrow">Find Us</div></div>
+    <h2 class="reveal d1">On Egg Harbor Road, in the village.</h2>
     <div class="loc-grid">
-      <div class="loc-map" role="img" aria-label="Map location of The Ashbrooke in Egg Harbor">
+      <div class="loc-map reveal d2" role="img" aria-label="Map location of The Ashbrooke in Egg Harbor">
         <div class="loc-map-inner">
+          <div class="pin-mark">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s-7-5.5-7-12a7 7 0 0 1 14 0c0 6.5-7 12-7 12z"/><circle cx="12" cy="10" r="2.6"/></svg>
+          </div>
           <div class="pin">The Ashbrooke</div>
           <div class="addr">7942 Egg Harbor Rd, Egg Harbor, WI 54209</div>
         </div>
       </div>
-      <div class="loc-detail">
+      <div class="loc-detail reveal d3">
         <p class="lede" style="font-size:1.08rem;">A short walk from the heart of Egg Harbor and an easy drive up the peninsula toward Fish Creek, Sister Bay, and the orchards beyond.</p>
         <dl>
           <dt>Address</dt>
@@ -810,11 +1199,11 @@
 <section class="alt" id="faq">
   <div class="container narrow">
     <div class="center">
-      <div class="section-eyebrow">Good to Know</div>
-      <h2>Questions before you book.</h2>
+      <div class="reveal"><div class="section-eyebrow">Good to Know</div></div>
+      <h2 class="reveal d1">Questions before you book.</h2>
     </div>
 
-    <div style="margin-top:2.4rem;">
+    <div style="margin-top:3rem;" class="reveal d2">
       <details open>
         <summary>Is The Ashbrooke really adults-only?</summary>
         <div>
@@ -893,6 +1282,62 @@
     </div>
   </div>
 </footer>
+
+<script>
+(function () {
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Sticky header condense on scroll
+  var header = document.getElementById('siteHeader');
+  function onScroll() {
+    if (window.scrollY > 40) { header.classList.add('scrolled'); }
+    else { header.classList.remove('scrolled'); }
+    // Parallax hero
+    if (!reduceMotion && heroBg) {
+      var y = window.scrollY;
+      if (y < window.innerHeight) {
+        heroBg.style.transform = 'translateY(' + (y * 0.28) + 'px)';
+      }
+    }
+  }
+  var heroBg = document.getElementById('heroBg');
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Mobile nav
+  var hamburger = document.getElementById('hamburger');
+  var mobileNav = document.getElementById('mobileNav');
+  function closeMenu() {
+    document.body.classList.remove('menu-open');
+    mobileNav.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+  }
+  hamburger.addEventListener('click', function () {
+    var open = mobileNav.classList.toggle('open');
+    document.body.classList.toggle('menu-open', open);
+    hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  mobileNav.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', closeMenu);
+  });
+
+  // Scroll reveal via IntersectionObserver
+  var revealEls = document.querySelectorAll('.reveal');
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    revealEls.forEach(function (el) { el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    revealEls.forEach(function (el) { io.observe(el); });
+  }
+})();
+</script>
 
 </body>
 </html>
