@@ -250,6 +250,21 @@
     will-change: transform;
     z-index: 0;
   }
+  /* Real property photo behind the hero, under the gradient overlay for legibility */
+  .hero-photo {
+    position: absolute;
+    inset: -8% 0 0 0;
+    height: 116%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center 42%;
+    z-index: 0;
+    will-change: transform;
+  }
+  .hero-bg {
+    /* gradient now acts as the legibility scrim over the photo */
+    mix-blend-mode: normal;
+  }
   .hero-bg::before {
     content: "";
     position: absolute;
@@ -888,6 +903,101 @@
     gap: 12px;
   }
 
+  /* Real photo layers (object-fit cover, legibility scrims) */
+  .photo-fill {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    transition: transform 0.9s var(--ease);
+    transform: scale(1.02);
+  }
+  .room-card:hover .room-image .photo-fill { transform: scale(1.10); }
+  /* When a room image carries a real photo, the gradient art sits beneath it */
+  .room-image.has-photo .room-art { opacity: 0; }
+  .portrait .photo-fill,
+  .exp-image .photo-fill,
+  .loc-map .photo-fill { transform: scale(1.0); }
+  .portrait.has-photo::after,
+  .exp-image.has-photo::after,
+  .loc-map.has-photo::before,
+  .loc-map.has-photo::after { /* keep texture/scrim/border above the photo for legibility */ z-index: 1; }
+  /* extra dark scrim on the location photo so the pin and address stay legible */
+  .loc-map.has-photo .loc-map-inner::before {
+    content: "";
+    position: absolute;
+    inset: -40px -60px;
+    background: radial-gradient(ellipse at center, rgba(42,14,18,0.55) 0%, rgba(42,14,18,0.15) 70%, transparent 100%);
+    z-index: -1;
+  }
+  .portrait.has-photo .portrait-cap,
+  .exp-image.has-photo span,
+  .loc-map.has-photo .loc-map-inner { z-index: 3; }
+
+  /* Experience photo band (full-bleed image strip) */
+  .photo-band {
+    position: relative;
+    min-height: 460px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    color: var(--cream);
+  }
+  .photo-band .photo-fill { transform: scale(1.0); transition: transform 8s var(--ease); }
+  .photo-band:hover .photo-fill { transform: scale(1.06); }
+  .photo-band .band-scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(180deg, rgba(42,14,18,0.55) 0%, rgba(42,14,18,0.30) 45%, rgba(42,14,18,0.72) 100%),
+      radial-gradient(ellipse at 50% 120%, rgba(0,0,0,0.45), transparent 60%);
+  }
+  .photo-band .band-inner { position: relative; z-index: 2; padding: 60px 28px; max-width: 760px; }
+  .photo-band .section-eyebrow { color: var(--gold-soft); justify-content: center; }
+  .photo-band .section-eyebrow::before, .photo-band .section-eyebrow::after { background: var(--gold-soft); }
+  .photo-band h2 { color: var(--cream); margin-bottom: 1rem; text-shadow: 0 2px 30px rgba(0,0,0,0.4); }
+  .photo-band p { color: rgba(248,243,234,0.92); font-size: 1.12rem; font-weight: 300; max-width: 620px; margin: 0 auto; }
+
+  /* Gallery */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 200px;
+    gap: 12px;
+    margin-top: 3.4rem;
+  }
+  .gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: var(--shadow-soft);
+  }
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.9s var(--ease);
+    transform: scale(1.01);
+    display: block;
+  }
+  .gallery-item:hover img { transform: scale(1.09); }
+  .gallery-item::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 55%, rgba(42,14,18,0.35) 100%);
+    opacity: 0;
+    transition: opacity 0.4s var(--ease);
+  }
+  .gallery-item:hover::after { opacity: 1; }
+  .gallery-item.wide { grid-column: span 2; }
+  .gallery-item.tall { grid-row: span 2; }
+
   @media (max-width: 880px) {
     .nav-links { display: none; }
     .hamburger { display: flex; }
@@ -903,6 +1013,10 @@
     .footer-meta { flex-direction: column; }
     .trust-band .container { font-size: 0.78rem; }
     .trust-dot { margin: 0 8px; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 150px; }
+    .gallery-item.wide { grid-column: span 2; }
+    .gallery-item.tall { grid-row: span 1; }
+    .photo-band { min-height: 360px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -919,6 +1033,7 @@
   <a href="#story">Our Story</a>
   <a href="#rooms">Rooms</a>
   <a href="#amenities">Amenities</a>
+  <a href="#gallery">Gallery</a>
   <a href="#location">Location</a>
   <a href="#faq">FAQ</a>
   <a class="btn" href="#book">Book Direct</a>
@@ -932,6 +1047,7 @@
         <li><a href="#story">Our Story</a></li>
         <li><a href="#rooms">Rooms</a></li>
         <li><a href="#amenities">Amenities</a></li>
+        <li><a href="#gallery">Gallery</a></li>
         <li><a href="#location">Location</a></li>
         <li><a href="#faq">FAQ</a></li>
         <li class="nav-cta"><a class="btn btn-ghost" href="#book">Book Direct</a></li>
@@ -944,6 +1060,7 @@
 </header>
 
 <section class="hero">
+  <img class="hero-photo" id="heroPhoto" src="https://media.q4launch.website/uploads/sites/94/2024/02/Ashbrooke-Hotel-T-Facade-Back-1-Edit-e1559656397283.jpg" alt="The Ashbrooke hotel exterior at sunset in Egg Harbor, Door County" loading="eager" fetchpriority="high">
   <div class="hero-bg" id="heroBg"></div>
   <div class="hero-vignette"></div>
   <div class="container hero-inner">
@@ -974,7 +1091,8 @@
     <p class="lede reveal d2">The Ashbrooke has been stewarded by the Anderson family since 2001. A quarter century later, it remains the one Door County hotel built entirely around couples and adult travelers, with no children in the building and no compromise on quiet.</p>
 
     <div class="about-grid">
-      <div class="portrait reveal d2" role="img" aria-label="The Anderson family at The Ashbrooke">
+      <div class="portrait has-photo reveal d2">
+        <img class="photo-fill" src="https://media.q4launch.website/uploads/sites/94/2018/12/Signature-Room.jpg" alt="A guest room at The Ashbrooke, the family-owned adults-only hotel in Egg Harbor" loading="lazy">
         <div class="portrait-cap">
           The Anderson Family
           <span>Egg Harbor &middot; Since 2001</span>
@@ -1015,7 +1133,7 @@
 
     <div class="room-grid">
       <article class="room-card reveal d1">
-        <div class="room-image r1"><div class="room-art"></div><span class="room-tag">I</span></div>
+        <div class="room-image r1 has-photo"><img class="photo-fill" src="https://media.q4launch.website/uploads/sites/94/2020/01/Ashbrooke-Hotel-Rooms-GrandWhirlpoolSuite-202-2-XL.jpg" alt="Whirlpool Fireplace Suite at The Ashbrooke with in-room whirlpool tub" loading="lazy"><div class="room-art"></div><span class="room-tag">I</span></div>
         <div class="room-body">
           <h4>Whirlpool Fireplace Suite</h4>
           <p>Our signature pairing. An in-room whirlpool tub and a gas fireplace in one suite, made for milestone anniversaries and slow celebration weekends.</p>
@@ -1025,7 +1143,7 @@
       </article>
 
       <article class="room-card reveal d2">
-        <div class="room-image r2"><div class="room-art"></div><span class="room-tag">II</span></div>
+        <div class="room-image r2 has-photo"><img class="photo-fill" src="https://media.q4launch.website/uploads/sites/94/2019/06/Ashbrooke-Hotel-Rooms-GrandSuite-123-1.jpg" alt="Balcony Suite at The Ashbrooke with private outdoor seating" loading="lazy"><div class="room-art"></div><span class="room-tag">II</span></div>
         <div class="room-body">
           <h4>Balcony Suite</h4>
           <p>A private balcony over the grounds, with seating for an evening drink and the long Door County sunset. The whirlpool stays right inside.</p>
@@ -1035,7 +1153,7 @@
       </article>
 
       <article class="room-card reveal d3">
-        <div class="room-image r3"><div class="room-art"></div><span class="room-tag">III</span></div>
+        <div class="room-image r3 has-photo"><img class="photo-fill" src="https://media.q4launch.website/uploads/sites/94/2019/06/Ashbrooke-Hotel-Rooms-Brighton-1.jpg" alt="Premium King room at The Ashbrooke with a spacious sitting area" loading="lazy"><div class="room-art"></div><span class="room-tag">III</span></div>
         <div class="room-body">
           <h4>Premium King</h4>
           <p>A spacious king-bedded room with a luxury bath and a sitting area, suited to the longer weekend when you plan to settle in.</p>
@@ -1045,7 +1163,7 @@
       </article>
 
       <article class="room-card reveal d1">
-        <div class="room-image r4"><div class="room-art"></div><span class="room-tag">IV</span></div>
+        <div class="room-image r4 has-photo"><img class="photo-fill" src="https://media.q4launch.website/uploads/sites/94/2016/04/GWS202-living-room.jpg" alt="Fireplace Studio living area at The Ashbrooke" loading="lazy"><div class="room-art"></div><span class="room-tag">IV</span></div>
         <div class="room-body">
           <h4>Fireplace Studio</h4>
           <p>A studio layout centered on the fireplace, with a queen bed and a quiet corner placement in the building for couples who want to disappear for a while.</p>
@@ -1055,7 +1173,7 @@
       </article>
 
       <article class="room-card reveal d2">
-        <div class="room-image r5"><div class="room-art"></div><span class="room-tag">V</span></div>
+        <div class="room-image r5 has-photo"><img class="photo-fill" src="https://media.q4launch.website/uploads/sites/94/2019/06/Ashbrooke-Hotel-Rooms-SignatureRoom-222-1-e1559592708164.jpg" alt="Classic King room at The Ashbrooke with the signature in-room whirlpool tub" loading="lazy"><div class="room-art"></div><span class="room-tag">V</span></div>
         <div class="room-body">
           <h4>Classic King Room</h4>
           <p>The traditional Ashbrooke king, anchored by the in-room whirlpool tub that has become the inn's signature comfort.</p>
@@ -1065,7 +1183,7 @@
       </article>
 
       <article class="room-card reveal d3">
-        <div class="room-image r6"><div class="room-art"></div><span class="room-tag">VI</span></div>
+        <div class="room-image r6 has-photo"><img class="photo-fill" src="https://media.q4launch.website/uploads/sites/94/2019/06/Ashbrooke-Hotel-Rooms-Getaway-117-a-1.jpg" alt="Garden Room at The Ashbrooke with ground-floor garden access" loading="lazy"><div class="room-art"></div><span class="room-tag">VI</span></div>
         <div class="room-body">
           <h4>Garden Room</h4>
           <p>A ground-floor garden-side room with direct access to the inn's quiet outdoor seating, ideal for early risers who like their coffee outside.</p>
@@ -1132,6 +1250,16 @@
   </div>
 </section>
 
+<section class="photo-band" aria-label="The grounds and pool area at The Ashbrooke" style="padding:0;">
+  <img class="photo-fill" src="https://media.q4launch.website/uploads/sites/94/2020/01/Ashbrooke-Hotel-T-Pool-Area-5-XL.jpg" alt="The pool area and grounds at The Ashbrooke in Egg Harbor" loading="lazy">
+  <div class="band-scrim"></div>
+  <div class="band-inner reveal">
+    <div class="section-eyebrow">On the Grounds</div>
+    <h2>Quiet space, kept for two.</h2>
+    <p>Beyond the rooms, the grounds carry the same unhurried calm. A place to slow down between a morning in the orchards and an evening by the fire.</p>
+  </div>
+</section>
+
 <section id="experience">
   <div class="container">
     <div class="reveal"><div class="section-eyebrow">The Door County Experience</div></div>
@@ -1147,8 +1275,36 @@
           <li><strong>Quiet evenings home</strong> a fireplace and a whirlpool tub waiting at the end of the day</li>
         </ul>
       </div>
-      <div class="exp-image reveal d3" role="img" aria-label="Door County waterfront and orchards near Egg Harbor">
+      <div class="exp-image has-photo reveal d3">
+        <img class="photo-fill" src="https://media.q4launch.website/uploads/sites/94/2020/01/door-county-wi.jpg" alt="Waterfront and pier in Egg Harbor, Door County, Wisconsin" loading="lazy">
         <span>Door County, Wisconsin</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="gallery">
+  <div class="container">
+    <div class="center">
+      <div class="reveal"><div class="section-eyebrow">Gallery</div></div>
+      <h2 class="reveal d1">A look around The Ashbrooke.</h2>
+      <p class="lede reveal d2">Rooms made for two and the Door County that surrounds them. Every image is the inn and the peninsula as you will find them.</p>
+    </div>
+    <div class="gallery-grid reveal d2">
+      <div class="gallery-item wide tall">
+        <img src="https://media.q4launch.website/uploads/sites/94/2019/06/Ashbrooke-Hotel-Rooms-GrandSuite-123-2.jpg" alt="Grande Suite at The Ashbrooke" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://media.q4launch.website/uploads/sites/94/2019/06/Ashbrooke-Hotel-Rooms-Ashley-115-2-1.jpg" alt="Ashley guest room at The Ashbrooke" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://media.q4launch.website/uploads/sites/94/2020/01/door-county-cherry-picking.jpg" alt="Cherry picking in the Door County orchards near Egg Harbor" loading="lazy">
+      </div>
+      <div class="gallery-item wide">
+        <img src="https://media.q4launch.website/uploads/sites/94/2021/12/things-to-do-in-door-county.png" alt="Scenic views in Door County, Wisconsin" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="https://media.q4launch.website/uploads/sites/94/2020/01/sturgeon-point-lightouse-door-county-scaled-1.jpg" alt="Canal lighthouse at Sturgeon Point, Door County" loading="lazy">
       </div>
     </div>
   </div>
@@ -1171,7 +1327,8 @@
     <div class="reveal"><div class="section-eyebrow">Find Us</div></div>
     <h2 class="reveal d1">On Egg Harbor Road, in the village.</h2>
     <div class="loc-grid">
-      <div class="loc-map reveal d2" role="img" aria-label="Map location of The Ashbrooke in Egg Harbor">
+      <div class="loc-map has-photo reveal d2" role="img" aria-label="The Ashbrooke in Egg Harbor, Door County">
+        <img class="photo-fill" src="https://media.q4launch.website/uploads/sites/94/2020/01/door-county-trees-sunset.jpg" alt="Sunset over the trees near Egg Harbor in Door County" loading="lazy" style="filter:saturate(0.92) brightness(0.7);">
         <div class="loc-map-inner">
           <div class="pin-mark">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s-7-5.5-7-12a7 7 0 0 1 14 0c0 6.5-7 12-7 12z"/><circle cx="12" cy="10" r="2.6"/></svg>
@@ -1262,6 +1419,7 @@
           <li><a href="#story">Our Story</a></li>
           <li><a href="#rooms">Rooms &amp; Suites</a></li>
           <li><a href="#amenities">Amenities</a></li>
+          <li><a href="#gallery">Gallery</a></li>
           <li><a href="#location">Location</a></li>
           <li><a href="#faq">FAQ</a></li>
         </ul>
@@ -1297,10 +1455,12 @@
       var y = window.scrollY;
       if (y < window.innerHeight) {
         heroBg.style.transform = 'translateY(' + (y * 0.28) + 'px)';
+        if (heroPhoto) { heroPhoto.style.transform = 'translateY(' + (y * 0.16) + 'px)'; }
       }
     }
   }
   var heroBg = document.getElementById('heroBg');
+  var heroPhoto = document.getElementById('heroPhoto');
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
