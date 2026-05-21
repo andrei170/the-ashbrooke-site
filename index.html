@@ -231,6 +231,7 @@
   /* Hero */
   .hero {
     min-height: 100vh;
+    height: 100vh;
     color: var(--cream);
     position: relative;
     overflow: hidden;
@@ -243,27 +244,29 @@
     inset: -8% 0 0 0;
     height: 116%;
     background:
-      linear-gradient(180deg, rgba(63, 20, 29, 0.55) 0%, rgba(42, 14, 18, 0.30) 40%, rgba(42, 14, 18, 0.85) 100%),
-      radial-gradient(ellipse 70% 60% at 72% 20%, rgba(201, 168, 102, 0.40), transparent 60%),
-      radial-gradient(ellipse 80% 70% at 18% 78%, rgba(107, 31, 46, 0.65), transparent 62%),
-      linear-gradient(135deg, #2e0c14 0%, #5a1925 42%, #8c6d3a 118%);
+      linear-gradient(180deg, rgba(63, 20, 29, 0.42) 0%, rgba(42, 14, 18, 0.20) 42%, rgba(42, 14, 18, 0.82) 100%),
+      radial-gradient(ellipse 70% 60% at 72% 20%, rgba(201, 168, 102, 0.22), transparent 60%),
+      radial-gradient(ellipse 80% 70% at 18% 82%, rgba(107, 31, 46, 0.38), transparent 64%);
     will-change: transform;
-    z-index: 0;
+    z-index: 1;
+    pointer-events: none;
   }
   /* Real property photo behind the hero, under the gradient overlay for legibility */
   .hero-photo {
     position: absolute;
-    inset: -8% 0 0 0;
+    inset: -8% -4% 0 -4%;
     height: 116%;
-    width: 100%;
+    width: 108%;
     object-fit: cover;
     object-position: center 42%;
     z-index: 0;
     will-change: transform;
+    transform-origin: 60% 45%;
+    animation: heroKenBurns 26s ease-in-out infinite alternate;
   }
-  .hero-bg {
-    /* gradient now acts as the legibility scrim over the photo */
-    mix-blend-mode: normal;
+  @keyframes heroKenBurns {
+    0%   { transform: scale(1.0); }
+    100% { transform: scale(1.10); }
   }
   .hero-bg::before {
     content: "";
@@ -538,19 +541,19 @@
     display: flex;
     flex-direction: column;
   }
-  .room-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-card); }
+  .room-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-deep); }
   .room-image {
-    aspect-ratio: 4/3;
+    aspect-ratio: 4/5;
     position: relative;
     overflow: hidden;
     display: flex;
     align-items: flex-end;
-    padding: 22px 24px;
+    padding: 26px 26px;
   }
   .room-image .room-art {
     position: absolute;
     inset: 0;
-    transition: transform 0.9s var(--ease);
+    transition: transform 1.1s var(--ease);
     transform: scale(1.02);
   }
   .room-card:hover .room-image .room-art { transform: scale(1.10); }
@@ -571,8 +574,16 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, transparent 40%, rgba(20,6,9,0.62) 100%);
+    background:
+      linear-gradient(180deg, rgba(20,6,9,0.0) 38%, rgba(20,6,9,0.30) 70%, rgba(20,6,9,0.68) 100%),
+      linear-gradient(135deg, rgba(107,31,46,0.10) 0%, transparent 55%);
     z-index: 1;
+    transition: background 0.5s var(--ease);
+  }
+  .room-card:hover .room-image::after {
+    background:
+      linear-gradient(180deg, rgba(20,6,9,0.0) 42%, rgba(20,6,9,0.24) 72%, rgba(20,6,9,0.60) 100%),
+      linear-gradient(135deg, rgba(107,31,46,0.06) 0%, transparent 55%);
   }
   .room-tag {
     color: var(--cream);
@@ -910,11 +921,12 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center center;
     z-index: 0;
-    transition: transform 0.9s var(--ease);
-    transform: scale(1.02);
+    transition: transform 1.1s var(--ease);
+    transform: scale(1.03);
   }
-  .room-card:hover .room-image .photo-fill { transform: scale(1.10); }
+  .room-card:hover .room-image .photo-fill { transform: scale(1.12); }
   /* When a room image carries a real photo, the gradient art sits beneath it */
   .room-image.has-photo .room-art { opacity: 0; }
   .portrait .photo-fill,
@@ -936,10 +948,15 @@
   .exp-image.has-photo span,
   .loc-map.has-photo .loc-map-inner { z-index: 3; }
 
-  /* Experience photo band (full-bleed image strip) */
+  /* Experience photo band (full-bleed, edge-to-edge image) */
   .photo-band {
     position: relative;
-    min-height: 460px;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    min-height: 72vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -947,56 +964,141 @@
     overflow: hidden;
     color: var(--cream);
   }
-  .photo-band .photo-fill { transform: scale(1.0); transition: transform 8s var(--ease); }
-  .photo-band:hover .photo-fill { transform: scale(1.06); }
+  .photo-band .photo-fill {
+    transform: scale(1.04);
+    transition: transform 1.2s var(--ease);
+    object-position: center 50%;
+  }
+  .photo-band.kb .photo-fill {
+    animation: bandKenBurns 22s ease-in-out infinite alternate;
+  }
+  @keyframes bandKenBurns {
+    0%   { transform: scale(1.04); }
+    100% { transform: scale(1.14); }
+  }
   .photo-band .band-scrim {
     position: absolute;
     inset: 0;
     z-index: 1;
     background:
-      linear-gradient(180deg, rgba(42,14,18,0.55) 0%, rgba(42,14,18,0.30) 45%, rgba(42,14,18,0.72) 100%),
-      radial-gradient(ellipse at 50% 120%, rgba(0,0,0,0.45), transparent 60%);
+      linear-gradient(180deg, rgba(42,14,18,0.50) 0%, rgba(42,14,18,0.20) 45%, rgba(42,14,18,0.70) 100%),
+      radial-gradient(ellipse at 50% 120%, rgba(0,0,0,0.42), transparent 62%);
   }
-  .photo-band .band-inner { position: relative; z-index: 2; padding: 60px 28px; max-width: 760px; }
+  .photo-band .band-inner { position: relative; z-index: 2; padding: 80px 28px; max-width: 780px; }
   .photo-band .section-eyebrow { color: var(--gold-soft); justify-content: center; }
   .photo-band .section-eyebrow::before, .photo-band .section-eyebrow::after { background: var(--gold-soft); }
-  .photo-band h2 { color: var(--cream); margin-bottom: 1rem; text-shadow: 0 2px 30px rgba(0,0,0,0.4); }
-  .photo-band p { color: rgba(248,243,234,0.92); font-size: 1.12rem; font-weight: 300; max-width: 620px; margin: 0 auto; }
+  .photo-band h2 { color: var(--cream); margin-bottom: 1rem; text-shadow: 0 2px 30px rgba(0,0,0,0.45); }
+  .photo-band p { color: rgba(248,243,234,0.94); font-size: 1.16rem; font-weight: 300; max-width: 640px; margin: 0 auto; }
+  .photo-band .band-caption {
+    position: absolute;
+    bottom: 24px;
+    right: 32px;
+    z-index: 2;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    letter-spacing: 0.03em;
+    color: rgba(248,243,234,0.78);
+    text-shadow: 0 1px 12px rgba(0,0,0,0.5);
+  }
 
   /* Gallery */
   .gallery-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 200px;
-    gap: 12px;
-    margin-top: 3.4rem;
+    grid-auto-rows: 280px;
+    gap: 16px;
+    margin-top: 3.6rem;
   }
   .gallery-item {
     position: relative;
     overflow: hidden;
-    border-radius: 8px;
-    box-shadow: var(--shadow-soft);
+    border-radius: 10px;
+    box-shadow: var(--shadow-card);
+    cursor: pointer;
   }
   .gallery-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.9s var(--ease);
-    transform: scale(1.01);
+    object-position: center center;
+    transition: transform 1.0s var(--ease);
+    transform: scale(1.02);
     display: block;
   }
-  .gallery-item:hover img { transform: scale(1.09); }
+  .gallery-item:hover img { transform: scale(1.10); }
   .gallery-item::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, transparent 55%, rgba(42,14,18,0.35) 100%);
+    background: linear-gradient(180deg, transparent 52%, rgba(42,14,18,0.42) 100%);
     opacity: 0;
-    transition: opacity 0.4s var(--ease);
+    transition: opacity 0.45s var(--ease);
   }
   .gallery-item:hover::after { opacity: 1; }
+  .gallery-item .gallery-cap {
+    position: absolute;
+    left: 22px;
+    bottom: 18px;
+    z-index: 2;
+    color: var(--cream);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.22rem;
+    letter-spacing: 0.02em;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
+    text-shadow: 0 2px 16px rgba(0,0,0,0.55);
+  }
+  .gallery-item:hover .gallery-cap { opacity: 1; transform: translateY(0); }
   .gallery-item.wide { grid-column: span 2; }
   .gallery-item.tall { grid-row: span 2; }
+
+  /* Lightbox */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    background: rgba(20, 6, 9, 0.92);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s var(--ease);
+  }
+  .lightbox.open { opacity: 1; pointer-events: auto; }
+  .lightbox img {
+    max-width: 92vw;
+    max-height: 86vh;
+    border-radius: 8px;
+    box-shadow: var(--shadow-deep);
+    border: 1px solid rgba(216, 190, 140, 0.30);
+    transform: scale(0.96);
+    transition: transform 0.45s var(--ease);
+  }
+  .lightbox.open img { transform: scale(1); }
+  .lightbox-close {
+    position: absolute;
+    top: 28px;
+    right: 34px;
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    border: 1px solid rgba(216, 190, 140, 0.5);
+    background: rgba(42, 14, 18, 0.5);
+    color: var(--cream);
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s, transform 0.3s var(--ease);
+  }
+  .lightbox-close:hover { background: var(--burgundy); transform: rotate(90deg); }
 
   @media (max-width: 880px) {
     .nav-links { display: none; }
@@ -1013,10 +1115,15 @@
     .footer-meta { flex-direction: column; }
     .trust-band .container { font-size: 0.78rem; }
     .trust-dot { margin: 0 8px; }
-    .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 150px; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; gap: 12px; }
     .gallery-item.wide { grid-column: span 2; }
     .gallery-item.tall { grid-row: span 1; }
-    .photo-band { min-height: 360px; }
+    .gallery-item .gallery-cap { opacity: 1; transform: none; font-size: 1.05rem; left: 16px; bottom: 14px; }
+    .photo-band { min-height: 54vh; }
+    .photo-band .band-inner { padding: 56px 24px; }
+    .photo-band .band-caption { display: none; }
+    .room-image { aspect-ratio: 4/3; }
+    .hero { height: 100vh; min-height: 560px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -1092,7 +1199,7 @@
 
     <div class="about-grid">
       <div class="portrait has-photo reveal d2">
-        <img class="photo-fill" src="https://media.q4launch.website/uploads/sites/94/2018/12/Signature-Room.jpg" alt="A guest room at The Ashbrooke, the family-owned adults-only hotel in Egg Harbor" loading="lazy">
+        <img class="photo-fill" src="https://media.q4launch.website/uploads/sites/94/2018/12/Signature-Room.jpg" alt="A guest room at The Ashbrooke, the family-owned adults-only hotel in Egg Harbor" loading="lazy" style="object-position:center 40%;">
         <div class="portrait-cap">
           The Anderson Family
           <span>Egg Harbor &middot; Since 2001</span>
@@ -1250,14 +1357,15 @@
   </div>
 </section>
 
-<section class="photo-band" aria-label="The grounds and pool area at The Ashbrooke" style="padding:0;">
-  <img class="photo-fill" src="https://media.q4launch.website/uploads/sites/94/2020/01/Ashbrooke-Hotel-T-Pool-Area-5-XL.jpg" alt="The pool area and grounds at The Ashbrooke in Egg Harbor" loading="lazy">
+<section class="photo-band kb" aria-label="The grounds and pool area at The Ashbrooke" style="padding:0;">
+  <img class="photo-fill" src="https://media.q4launch.website/uploads/sites/94/2020/01/Ashbrooke-Hotel-T-Pool-Area-5-XL.jpg" alt="The pool area and grounds at The Ashbrooke in Egg Harbor" loading="lazy" style="object-position:center 55%;">
   <div class="band-scrim"></div>
   <div class="band-inner reveal">
     <div class="section-eyebrow">On the Grounds</div>
     <h2>Quiet space, kept for two.</h2>
     <p>Beyond the rooms, the grounds carry the same unhurried calm. A place to slow down between a morning in the orchards and an evening by the fire.</p>
   </div>
+  <div class="band-caption">The pool and grounds &middot; Egg Harbor</div>
 </section>
 
 <section id="experience">
@@ -1276,11 +1384,22 @@
         </ul>
       </div>
       <div class="exp-image has-photo reveal d3">
-        <img class="photo-fill" src="https://media.q4launch.website/uploads/sites/94/2020/01/door-county-wi.jpg" alt="Waterfront and pier in Egg Harbor, Door County, Wisconsin" loading="lazy">
+        <img class="photo-fill" src="https://media.q4launch.website/uploads/sites/94/2020/01/door-county-wi.jpg" alt="Waterfront and pier in Egg Harbor, Door County, Wisconsin" loading="lazy" style="object-position:center 45%;">
         <span>Door County, Wisconsin</span>
       </div>
     </div>
   </div>
+</section>
+
+<section class="photo-band kb" aria-label="The orchards of Door County near Egg Harbor" style="padding:0;">
+  <img class="photo-fill" src="https://media.q4launch.website/uploads/sites/94/2020/01/door-county-cherry-picking.jpg" alt="Cherry orchards in Door County near Egg Harbor, the country the Seaquist family farms" loading="lazy" style="object-position:center 50%;">
+  <div class="band-scrim"></div>
+  <div class="band-inner reveal">
+    <div class="section-eyebrow">The Peninsula</div>
+    <h2>Wisconsin cherry country, on your doorstep.</h2>
+    <p>Egg Harbor sits in the heart of the orchards Door County is known for, including the Seaquist family farms our own family married into. A morning among the trees, an afternoon on the water, an evening by the fire.</p>
+  </div>
+  <div class="band-caption">Door County orchards &middot; Wisconsin</div>
 </section>
 
 <section class="alt" id="gallery">
@@ -1290,25 +1409,47 @@
       <h2 class="reveal d1">A look around The Ashbrooke.</h2>
       <p class="lede reveal d2">Rooms made for two and the Door County that surrounds them. Every image is the inn and the peninsula as you will find them.</p>
     </div>
-    <div class="gallery-grid reveal d2">
+    <div class="gallery-grid reveal d2" id="galleryGrid">
       <div class="gallery-item wide tall">
         <img src="https://media.q4launch.website/uploads/sites/94/2019/06/Ashbrooke-Hotel-Rooms-GrandSuite-123-2.jpg" alt="Grande Suite at The Ashbrooke" loading="lazy">
+        <span class="gallery-cap">The Grande Suite</span>
       </div>
       <div class="gallery-item">
         <img src="https://media.q4launch.website/uploads/sites/94/2019/06/Ashbrooke-Hotel-Rooms-Ashley-115-2-1.jpg" alt="Ashley guest room at The Ashbrooke" loading="lazy">
+        <span class="gallery-cap">A room for two</span>
       </div>
       <div class="gallery-item">
         <img src="https://media.q4launch.website/uploads/sites/94/2020/01/door-county-cherry-picking.jpg" alt="Cherry picking in the Door County orchards near Egg Harbor" loading="lazy">
+        <span class="gallery-cap">Cherry country</span>
       </div>
       <div class="gallery-item wide">
         <img src="https://media.q4launch.website/uploads/sites/94/2021/12/things-to-do-in-door-county.png" alt="Scenic views in Door County, Wisconsin" loading="lazy">
+        <span class="gallery-cap">The peninsula</span>
       </div>
       <div class="gallery-item">
         <img src="https://media.q4launch.website/uploads/sites/94/2020/01/sturgeon-point-lightouse-door-county-scaled-1.jpg" alt="Canal lighthouse at Sturgeon Point, Door County" loading="lazy">
+        <span class="gallery-cap">Sturgeon Point</span>
+      </div>
+      <div class="gallery-item tall">
+        <img src="https://media.q4launch.website/uploads/sites/94/2018/12/Signature-Room.jpg" alt="The signature room at The Ashbrooke with its in-room whirlpool tub" loading="lazy">
+        <span class="gallery-cap">The signature room</span>
+      </div>
+      <div class="gallery-item wide">
+        <img src="https://media.q4launch.website/uploads/sites/94/2020/01/door-county-trees-sunset.jpg" alt="Sunset over the trees near Egg Harbor, Door County" loading="lazy">
+        <span class="gallery-cap">Evening on the peninsula</span>
+      </div>
+      <div class="gallery-item">
+        <img src="https://media.q4launch.website/uploads/sites/94/2020/01/door-county-wi.jpg" alt="Waterfront and pier in Egg Harbor, Door County" loading="lazy">
+        <span class="gallery-cap">The waterfront</span>
       </div>
     </div>
   </div>
 </section>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Gallery image viewer">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close image">&times;</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
 
 <section class="cta-band" id="book">
   <div class="container">
@@ -1480,6 +1621,37 @@
   mobileNav.querySelectorAll('a').forEach(function (a) {
     a.addEventListener('click', closeMenu);
   });
+
+  // Gallery lightbox
+  var grid = document.getElementById('galleryGrid');
+  var lightbox = document.getElementById('lightbox');
+  var lightboxImg = document.getElementById('lightboxImg');
+  var lightboxClose = document.getElementById('lightboxClose');
+  function openLightbox(src, alt) {
+    lightboxImg.src = src;
+    lightboxImg.alt = alt || '';
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  if (grid && lightbox) {
+    grid.querySelectorAll('.gallery-item').forEach(function (item) {
+      item.addEventListener('click', function () {
+        var img = item.querySelector('img');
+        if (img) { openLightbox(img.currentSrc || img.src, img.alt); }
+      });
+    });
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', function (e) {
+      if (e.target === lightbox) { closeLightbox(); }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && lightbox.classList.contains('open')) { closeLightbox(); }
+    });
+  }
 
   // Scroll reveal via IntersectionObserver
   var revealEls = document.querySelectorAll('.reveal');
